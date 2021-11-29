@@ -9,10 +9,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.judahben149.noteify.adapters.NoteListRecyclerViewAdapter
 import com.judahben149.noteify.R
+import com.judahben149.noteify.adapters.NoteListAdapterSwipeGestures
 import com.judahben149.noteify.databinding.FragmentNoteListBinding
 import com.judahben149.noteify.viewmodel.NoteViewModel
 
@@ -50,6 +53,27 @@ class NoteListFragment: Fragment() {
             .apply {
                 rvList.addItemDecoration(this)
             }
+
+        val swipeGestures = object : NoteListAdapterSwipeGestures(requireContext()){
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+
+                when(direction) {
+
+                    ItemTouchHelper.LEFT -> {
+                        //This is to get the object of the note item which the deleteNote method from the view model needs
+                        mViewModel.deleteNote(adapter.passItemPositionDuringSwipe(viewHolder.absoluteAdapterPosition))
+                        Snackbar.make(binding.root, "Note deleted", Snackbar.LENGTH_SHORT).show()
+                    }
+                    ItemTouchHelper.RIGHT -> {
+
+                    }
+
+                }
+            }
+        }
+
+        val touchHelper = ItemTouchHelper(swipeGestures)
+        touchHelper.attachToRecyclerView(rvList)
 
         return binding.root
     }

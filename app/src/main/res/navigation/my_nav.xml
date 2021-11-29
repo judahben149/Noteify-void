@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/addNoteFragment"
         android:name="com.judahben149.noteify.fragments.AddNoteFragment"
-        android:label="fragment_add_note"
+        android:label="Create note"
         tools:layout="@layout/fragment_add_note" >
         <action
             android:id="@+id/action_addNoteFragment_to_noteListFragment"
@@ -31,7 +31,7 @@
     <fragment
         android:id="@+id/noteDetailsFragment"
         android:name="com.judahben149.noteify.fragments.NoteDetailsFragment"
-        android:label="Update Note"
+        android:label="Edit Note"
         tools:layout="@layout/fragment_note_details">
         <action
             android:id="@+id/action_noteDetailsFragment_to_noteListFragment"

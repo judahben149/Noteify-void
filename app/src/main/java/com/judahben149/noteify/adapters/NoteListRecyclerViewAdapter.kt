@@ -10,7 +10,7 @@ import com.judahben149.noteify.model.Note
 
 class NoteListRecyclerViewAdapter(): RecyclerView.Adapter<NoteListRecyclerViewAdapter.NoteListRecyclerViewViewHolder>() {
 
-    private var noteList = emptyList<Note>()
+    var noteList = emptyList<Note>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteListRecyclerViewViewHolder {
         val binding = FragmentNoteItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -41,5 +41,14 @@ class NoteListRecyclerViewAdapter(): RecyclerView.Adapter<NoteListRecyclerViewAd
     fun setData(note: List<Note>) {
         this.noteList = note
         notifyDataSetChanged()
+    }
+
+    fun deleteItem(position: Int) {
+        noteList.drop(position)
+        notifyDataSetChanged()
+    }
+
+    fun passItemPositionDuringSwipe(position: Int): Note {
+        return noteList[position]
     }
 }

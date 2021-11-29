@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/drawable/ic_blue_plus_11965.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/drawable/ic_delete.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/drawable/ic_pin.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/activity_main.xml" value="0.18" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/fragment_add_note.xml" value="0.1" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/fragment_item_list.xml" value="0.2046875" />
