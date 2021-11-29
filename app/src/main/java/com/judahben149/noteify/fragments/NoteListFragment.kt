@@ -1,9 +1,9 @@
 package com.judahben149.noteify.fragments
 
+import android.app.AlertDialog
+import android.app.Dialog
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -23,6 +23,7 @@ class NoteListFragment: Fragment() {
 
     private lateinit var binding: FragmentNoteListBinding
     private lateinit var mViewModel: NoteViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -75,6 +76,7 @@ class NoteListFragment: Fragment() {
         val touchHelper = ItemTouchHelper(swipeGestures)
         touchHelper.attachToRecyclerView(rvList)
 
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -83,5 +85,39 @@ class NoteListFragment: Fragment() {
             Navigation.findNavController(binding.root).navigate(R.id.action_noteListFragment_to_addNoteFragment)
         }
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.actionbar_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.menu_deleteAllNotes) {
+            deleteAllNotes()
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun deleteAllNotes() {
+        val builder = AlertDialog.Builder(requireContext())
+
+        builder.apply {
+            setPositiveButton("Yes") {_,_ ->
+                mViewModel.deleteAllNotes()
+                Snackbar.make(binding.root, "Successfully deleted all notes", Snackbar.LENGTH_LONG).show()
+
+            }
+
+            setNegativeButton("No") {_,_ ->
+
+            }
+
+            setTitle("Delete all notes")
+            setMessage("Are you sure you want to delete all notes?")
+            setIcon(R.drawable.ic_delete)
+            create()
+            show()
+        }
     }
 }
