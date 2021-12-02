@@ -17,12 +17,15 @@ import com.judahben149.noteify.adapters.NoteListRecyclerViewAdapter
 import com.judahben149.noteify.R
 import com.judahben149.noteify.adapters.NoteListAdapterSwipeGestures
 import com.judahben149.noteify.databinding.FragmentNoteListBinding
+import com.judahben149.noteify.model.Note
 import com.judahben149.noteify.viewmodel.NoteViewModel
 
 class NoteListFragment: Fragment() {
 
     private lateinit var binding: FragmentNoteListBinding
     private lateinit var mViewModel: NoteViewModel
+    val adapter = NoteListRecyclerViewAdapter()
+
 
 
     override fun onCreateView(
@@ -32,9 +35,7 @@ class NoteListFragment: Fragment() {
     ): View? {
         binding = FragmentNoteListBinding.inflate(inflater, container, false)
 
-        val adapter = NoteListRecyclerViewAdapter()
         val rvList = binding.rvList
-
         rvList.adapter = adapter
 
         val layoutManager = LinearLayoutManager(
@@ -50,11 +51,15 @@ class NoteListFragment: Fragment() {
             adapter.setData(note)
         })
 
-        DividerItemDecoration(requireContext(), layoutManager.orientation)
-            .apply {
-                rvList.addItemDecoration(this)
-            }
 
+//        //this adds the divider line in between each item
+//        DividerItemDecoration(requireContext(), layoutManager.orientation)
+//            .apply {
+//                rvList.addItemDecoration(this)
+//            }
+
+
+        //this code implements the swipe action for deleting a note
         val swipeGestures = object : NoteListAdapterSwipeGestures(requireContext()){
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 
@@ -62,8 +67,14 @@ class NoteListFragment: Fragment() {
 
                     ItemTouchHelper.LEFT -> {
                         //This is to get the object of the note item which the deleteNote method from the view model needs
-                        mViewModel.deleteNote(adapter.passItemPositionDuringSwipe(viewHolder.absoluteAdapterPosition))
-                        Snackbar.make(binding.root, "Note deleted", Snackbar.LENGTH_SHORT).show()
+                        val deletedItemPosition = adapter.passItemPositionDuringSwipe(viewHolder.absoluteAdapterPosition)
+                        mViewModel.deleteNote(deletedItemPosition)
+                        Snackbar.make(binding.root, "Note deleted", Snackbar.LENGTH_SHORT).apply {
+                            setAction(R.string.undo) { _, ->
+                                undoDelete(deletedItemPosition)
+                            }
+                            show()
+                        }
                     }
                     ItemTouchHelper.RIGHT -> {
 
@@ -80,6 +91,10 @@ class NoteListFragment: Fragment() {
         return binding.root
     }
 
+    private fun undoDelete(position: Note) {
+        mViewModel.addNote(position)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.fabAddNoteButton.setOnClickListener {
             Navigation.findNavController(binding.root).navigate(R.id.action_noteListFragment_to_addNoteFragment)
@@ -87,17 +102,25 @@ class NoteListFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.actionbar_menu, menu)
     }
 
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.menu_deleteAllNotes) {
-            deleteAllNotes()
+            if (adapter.itemCount > 0) {
+                deleteAllNotes()
+            } else {
+                Snackbar.make(binding.root, "There is no note to delete", Snackbar.LENGTH_SHORT).show()
+            }
+
         }
 
         return super.onOptionsItemSelected(item)
     }
+
 
     private fun deleteAllNotes() {
         val builder = AlertDialog.Builder(requireContext())
@@ -119,5 +142,9 @@ class NoteListFragment: Fragment() {
             create()
             show()
         }
+    }
+
+    private fun snackBarDeleteAction(){
+
     }
 }

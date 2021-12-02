@@ -43,10 +43,6 @@ class NoteListRecyclerViewAdapter(): RecyclerView.Adapter<NoteListRecyclerViewAd
         notifyDataSetChanged()
     }
 
-    fun deleteItem(position: Int) {
-        noteList.drop(position)
-        notifyDataSetChanged()
-    }
 
     fun passItemPositionDuringSwipe(position: Int): Note {
         return noteList[position]

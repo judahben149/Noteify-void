@@ -44,4 +44,10 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
             repository.deleteAllNotes()
         }
     }
+
+    fun countDownDeleteNote() {
+        viewModelScope.launch(Dispatchers.IO) {
+            Thread.sleep(5000)
+        }
+    }
 }
