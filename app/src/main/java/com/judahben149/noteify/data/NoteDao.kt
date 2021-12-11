@@ -3,6 +3,7 @@ package com.judahben149.noteify.data
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.judahben149.noteify.model.Note
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface NoteDao {
@@ -22,5 +23,6 @@ interface NoteDao {
     @Query("DELETE FROM note_table")
     suspend fun deleteAllNotes()
 
-
+    @Query("SELECT * FROM note_table WHERE note_title LIKE :searchQuery OR note_body LIKE :searchQuery")
+    fun searchDatabase(searchQuery: String): LiveData<List<Note>>
 }

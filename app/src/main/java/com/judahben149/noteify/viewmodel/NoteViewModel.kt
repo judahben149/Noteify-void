@@ -50,4 +50,8 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
             Thread.sleep(5000)
         }
     }
+
+    fun searchDatabase(searchQuery: String): LiveData<List<Note>> {
+        return  repository.searchDatabase(searchQuery)
+    }
 }

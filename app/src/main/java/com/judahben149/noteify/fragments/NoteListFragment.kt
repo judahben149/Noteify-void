@@ -1,7 +1,6 @@
 package com.judahben149.noteify.fragments
 
 import android.app.AlertDialog
-import android.app.Dialog
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -20,12 +19,11 @@ import com.judahben149.noteify.databinding.FragmentNoteListBinding
 import com.judahben149.noteify.model.Note
 import com.judahben149.noteify.viewmodel.NoteViewModel
 
-class NoteListFragment: Fragment() {
+class NoteListFragment: Fragment(), androidx.appcompat.widget.SearchView.OnQueryTextListener {
 
     private lateinit var binding: FragmentNoteListBinding
     private lateinit var mViewModel: NoteViewModel
     val adapter = NoteListRecyclerViewAdapter()
-
 
 
     override fun onCreateView(
@@ -69,16 +67,16 @@ class NoteListFragment: Fragment() {
                         //This is to get the object of the note item which the deleteNote method from the view model needs
                         val deletedItemPosition = adapter.passItemPositionDuringSwipe(viewHolder.absoluteAdapterPosition)
                         mViewModel.deleteNote(deletedItemPosition)
-                        Snackbar.make(binding.root, "Note deleted", Snackbar.LENGTH_SHORT).apply {
+                        Snackbar.make(binding.root, "Note deleted", Snackbar.LENGTH_LONG).apply {
                             setAction(R.string.undo) { _, ->
                                 undoDelete(deletedItemPosition)
                             }
                             show()
                         }
                     }
-                    ItemTouchHelper.RIGHT -> {
-
-                    }
+//                    ItemTouchHelper.RIGHT -> {
+//
+//                    }
 
                 }
             }
@@ -91,9 +89,7 @@ class NoteListFragment: Fragment() {
         return binding.root
     }
 
-    private fun undoDelete(position: Note) {
-        mViewModel.addNote(position)
-    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.fabAddNoteButton.setOnClickListener {
@@ -103,9 +99,46 @@ class NoteListFragment: Fragment() {
     }
 
 
+
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.actionbar_menu, menu)
+
+        val search = menu.findItem(R.id.menu_search)
+        val searchView = search.actionView as? androidx.appcompat.widget.SearchView
+        searchView?.isSubmitButtonEnabled = true
+        searchView?.setOnQueryTextListener(this)
+
+        //return true
     }
+
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        if (query != null) {
+            searchDatabase(query)
+        }
+        return true
+    }
+
+    override fun onQueryTextChange(query: String?): Boolean {
+        if (query != null) {
+            searchDatabase(query)
+        }
+        return true
+    }
+
+
+    private fun searchDatabase(query: String) {
+        val searchQuery = "%$query%"
+
+        mViewModel.searchDatabase(searchQuery).observe(this, { list ->
+            list.let {
+                adapter.setData(it)
+            }
+
+        })
+    }
+
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -143,6 +176,14 @@ class NoteListFragment: Fragment() {
             show()
         }
     }
+
+
+
+    private fun undoDelete(position: Note) {
+        mViewModel.addNote(position)
+    }
+
+
 
     private fun snackBarDeleteAction(){
 

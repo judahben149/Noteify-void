@@ -16,7 +16,7 @@ import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 
 
 abstract class NoteListAdapterSwipeGestures(context: Context): ItemTouchHelper
-    .SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+    .SimpleCallback(0, ItemTouchHelper.LEFT) { //or ItemTouchHelper.RIGHT) {
 
     val deleteColor = ContextCompat.getColor(context, R.color.swipeDelete)
     val pinColor = ContextCompat.getColor(context, R.color.swipePin)

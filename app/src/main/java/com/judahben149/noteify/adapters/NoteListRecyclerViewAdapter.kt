@@ -11,6 +11,8 @@ import com.judahben149.noteify.model.Note
 class NoteListRecyclerViewAdapter(): RecyclerView.Adapter<NoteListRecyclerViewAdapter.NoteListRecyclerViewViewHolder>() {
 
     var noteList = emptyList<Note>()
+    val isSelectMode = false
+    val selectedItems = arrayListOf<Note>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteListRecyclerViewViewHolder {
         val binding = FragmentNoteItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -35,6 +37,8 @@ class NoteListRecyclerViewAdapter(): RecyclerView.Adapter<NoteListRecyclerViewAd
                 val action = NoteListFragmentDirections.actionNoteListFragmentToNoteDetailsFragment(currentNote)
                 Navigation.findNavController(binding.root).navigate(action)
             }
+
+            binding.noteItem.setOnLongClickListener()
         }
     }
 

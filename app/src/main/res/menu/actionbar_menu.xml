@@ -7,4 +7,11 @@
         android:title="Delete all notes"
         android:icon="@drawable/ic_delete"
         app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/menu_search"
+        android:title="Search"
+        android:icon="@drawable/ic_search"
+        app:showAsAction="always"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"/>
 </menu>
