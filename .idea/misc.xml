@@ -6,12 +6,15 @@
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/drawable/ic_blue_plus_11965.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/drawable/ic_delete.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/drawable/ic_pin.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/drawable/ic_search.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/drawable/search_box_drawable.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/activity_main.xml" value="0.18" />
-        <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/fragment_add_note.xml" value="0.1" />
+        <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/custom_action_bar.xml" value="0.2046875" />
+        <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/fragment_add_note.xml" value="0.2046875" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/fragment_item_list.xml" value="0.2046875" />
-        <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/fragment_note_details.xml" value="0.18385416666666668" />
-        <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/fragment_note_item.xml" value="0.5" />
-        <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/fragment_note_list.xml" value="0.18385416666666668" />
+        <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/fragment_note_details.xml" value="0.25" />
+        <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/fragment_note_item.xml" value="0.25" />
+        <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/fragment_note_list.xml" value="0.25" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/note_details.xml" value="0.18385416666666668" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/menu/actionbar_menu.xml" value="0.75" />
       </map>
