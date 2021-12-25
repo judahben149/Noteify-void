@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         //initialize variables here
         navView = binding.navigationView
         drawerLayout = binding.drawerLayout
-        toolbar = binding.toolbar
+        toolbar = binding.toolBar
 
         navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView2) as NavHostFragment
         navController = navHostFragment.navController
