@@ -14,7 +14,4 @@
 
     <color name="blue">#366ED8</color>
     <color name="blue_variant">#1F5DD1</color>
-    <color name="blue_tint">#F6F9FF</color>
-
-    <color name="grey_tint">#FAFAFA</color>
 </resources>

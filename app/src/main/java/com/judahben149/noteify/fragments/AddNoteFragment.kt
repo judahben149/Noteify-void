@@ -9,8 +9,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.judahben149.noteify.R
 import com.judahben149.noteify.databinding.FragmentAddNoteBinding
+import com.judahben149.noteify.model.FavoriteNote
 import com.judahben149.noteify.model.Note
 import com.judahben149.noteify.viewmodel.NoteViewModel
 
@@ -38,6 +40,12 @@ class AddNoteFragment : Fragment() {
         binding.btnSaveNoteAddNoteScreen.setOnClickListener {
             insertNoteToDatabase()
         }
+
+        binding.btnAddToFavoritesAddNoteScreen.setOnClickListener {
+            addNoteToFavoritesDatabase()
+            Snackbar.make(binding.root, "Note added to favorites", Snackbar.LENGTH_SHORT).show()
+        }
+
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -51,5 +59,15 @@ class AddNoteFragment : Fragment() {
         mViewmodel.addNote(note)
 
         Navigation.findNavController(binding.root).navigate(R.id.action_addNoteFragment_to_noteListFragment)
+    }
+
+    private fun addNoteToFavoritesDatabase() {
+        val noteTitle = binding.etNoteTitleAddNoteScreen.text.toString()
+        val noteBody = binding.etNoteBodyAddNoteScreen.text.toString()
+
+        val note = FavoriteNote(0, noteTitle, noteBody)
+//        mViewmodel.addFavoriteNote(note)
+
+        Snackbar.make(binding.root, "Added to favorites", Snackbar.LENGTH_SHORT).show()
     }
 }

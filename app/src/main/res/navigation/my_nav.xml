@@ -44,4 +44,19 @@
             android:name="currentNote"
             app:argType="com.judahben149.noteify.model.Note" />
     </fragment>
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.judahben149.noteify.fragments.FavoritesFragment"
+        android:label="Favorites"
+        tools:layout="@layout/fragment_favorites" />
+    <fragment
+        android:id="@+id/privateNotesFragment"
+        android:name="com.judahben149.noteify.fragments.PrivateNotesFragment"
+        android:label="Private"
+        tools:layout="@layout/fragment_private_notes" />
+    <fragment
+        android:id="@+id/deletedNotesFragment"
+        android:name="com.judahben149.noteify.fragments.DeletedNotesFragment"
+        android:label="Trash"
+        tools:layout="@layout/fragment_deleted_notes" />
 </navigation>

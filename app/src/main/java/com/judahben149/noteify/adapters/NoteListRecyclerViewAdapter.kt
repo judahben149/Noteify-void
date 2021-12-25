@@ -28,7 +28,6 @@ class NoteListRecyclerViewAdapter(): RecyclerView.Adapter<NoteListRecyclerViewAd
     init {
         setHasStableIds(true)
     }
-
     override fun getItemId(position: Int): Long = position.toLong()
 
 
@@ -43,7 +42,6 @@ class NoteListRecyclerViewAdapter(): RecyclerView.Adapter<NoteListRecyclerViewAd
                 val action = NoteListFragmentDirections.actionNoteListFragmentToNoteDetailsFragment(currentNote)
                 Navigation.findNavController(binding.root).navigate(action)
             }
-
         }
 
         fun getItemDetails(): ItemDetailsLookup.ItemDetails<Long> =
@@ -77,9 +75,7 @@ class NoteListRecyclerViewAdapter(): RecyclerView.Adapter<NoteListRecyclerViewAd
         }
     }
 
-
     override fun getItemCount() = noteList.size
-
 
 
     fun setData(note: List<Note>) {

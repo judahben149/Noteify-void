@@ -6,4 +6,16 @@
     <string name="enter_note_body">Enter note body</string>
     <string name="enter_note_title">Enter note title</string>
     <string name="add_note_button">Add Note Button</string>
+    <string name="all_notes">All Notes</string>
+    <string name="favorites">Favorites</string>
+    <string name="private_string">Private</string>
+    <string name="deleted">Deleted</string>
+    <string name="other">Other</string>
+    <string name="account_settings">Account Settings</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete_all_notes">Delete all notes</string>
+    <string name="save">Save</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+    <string name="trash">Trash</string>
 </resources>

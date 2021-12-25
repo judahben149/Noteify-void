@@ -4,11 +4,21 @@ import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toolbar
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.judahben149.noteify.R
 import com.judahben149.noteify.databinding.ActivityMainBinding
@@ -23,25 +33,70 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var mViewModel: NoteViewModel
 
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var navView: NavigationView
+    private lateinit var toolbar: androidx.appcompat.widget.Toolbar
+
+    lateinit var toggle: ActionBarDrawerToggle
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //initialize variables here
+        navView = binding.navigationView
+        drawerLayout = binding.drawerLayout
+        toolbar = binding.toolbar
+
         navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView2) as NavHostFragment
         navController = navHostFragment.navController
 
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-//        setupActionBarWithNavController(navController)
+
+//        toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.drawer_open, R.string.drawer_close)
+//        drawerLayout.addDrawerListener(toggle)
+//        toggle.syncState()
+
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.noteListFragment,
+                R.id.favoritesFragment,
+                R.id.privateNotesFragment,
+                R.id.deletedNotesFragment,
+
+            ), drawerLayout)
+
+        setupActionBarWithNavController(navController, appBarConfiguration)
+//        setSupportActionBar(toolbar)
+//        toolbar.setupWithNavController(navController, appBarConfiguration)
+
+        navView.setupWithNavController(navController)
 
         mViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
-
-        binding.deleteAllNotesIcon.setOnClickListener {
-            deleteAllNotes()
-        }
-
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = navHostFragment.navController
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        val inflater = menuInflater
+//        inflater.inflate(R.menu.actionbar_menu, menu)
+//        return super.onCreateOptionsMenu(menu)
+//    }
+//
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//
+//        when(item.itemId) {
+//            R.id.menu_deleteAllNotes -> {
+//                deleteAllNotes()
+//                return true
+//            }
+//        }
+//        return super.onOptionsItemSelected(item)
+//    }
 
 
     private fun deleteAllNotes() {

@@ -9,4 +9,30 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_note_button">Add Note Button</string>
     <string name="undo">UNDO</string>
+    <string name="all_notes">All Notes</string>
+    <string name="favorites">Favorites</string>
+    <string name="private_string">Private</string>
+    <string name="deleted">Deleted</string>
+    <string name="other">Other</string>
+    <string name="account_settings">Account Settings</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete_all_notes">Delete all notes</string>
+    <string name="save">Save</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+    <string name="trash">Trash</string>
 </resources>
