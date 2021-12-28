@@ -20,7 +20,7 @@ class FavoriteNotesAdapter(): RecyclerView.Adapter<FavoriteNotesAdapter.Favorite
             binding.tvNoteDescription.text = currentNote.noteBody
 
             binding.noteItem.setOnClickListener {
-                Snackbar.make(binding.root, "You have clicked me bro", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(binding.root, "You have clicked me", Snackbar.LENGTH_SHORT).show()
             }
         }
     }

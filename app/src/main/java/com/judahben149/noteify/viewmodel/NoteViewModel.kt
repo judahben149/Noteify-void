@@ -75,4 +75,10 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun deletePrivateNote(note: PrivateNote) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deletePrivateNote(note)
+        }
+    }
+
 }

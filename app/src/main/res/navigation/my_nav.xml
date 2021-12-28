@@ -15,6 +15,9 @@
             app:destination="@id/noteListFragment"
             app:popUpTo="@id/my_nav"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_addNoteFragment_to_privateNotesFragment"
+            app:destination="@id/privateNotesFragment" />
     </fragment>
 
     <fragment
@@ -43,6 +46,9 @@
         <argument
             android:name="currentNote"
             app:argType="com.judahben149.noteify.model.Note" />
+        <action
+            android:id="@+id/action_noteDetailsFragment_to_privateNotesFragment"
+            app:destination="@id/privateNotesFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
@@ -52,8 +58,15 @@
     <fragment
         android:id="@+id/privateNotesFragment"
         android:name="com.judahben149.noteify.fragments.PrivateNotesFragment"
-        android:label="Private"
-        tools:layout="@layout/fragment_private_notes" />
+        android:label="Private Notes"
+        tools:layout="@layout/fragment_private_notes" >
+        <action
+            android:id="@+id/action_privateNotesFragment_to_privateNoteDetailsFragment"
+            app:destination="@id/privateNoteDetailsFragment" />
+        <action
+            android:id="@+id/action_privateNotesFragment_to_addPrivateNoteFragment"
+            app:destination="@id/addPrivateNoteFragment" />
+    </fragment>
     <fragment
         android:id="@+id/deletedNotesListFragment"
         android:name="com.judahben149.noteify.fragments.DeletedNotesListFragment"
@@ -63,4 +76,25 @@
         android:id="@+id/settingsFragment"
         android:name="com.judahben149.noteify.fragments.SettingsFragment"
         android:label="Settings"/>
+    <fragment
+        android:id="@+id/privateNoteDetailsFragment"
+        android:name="com.judahben149.noteify.fragments.PrivateNoteDetailsFragment"
+        android:label="Private note details"
+        tools:layout="@layout/fragment_private_note_details">
+        <argument
+            android:name="PrivateNoteDetails"
+            app:argType="com.judahben149.noteify.model.PrivateNote" />
+        <action
+            android:id="@+id/action_privateNoteDetailsFragment_to_privateNotesFragment"
+            app:destination="@id/privateNotesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPrivateNoteFragment"
+        android:name="com.judahben149.noteify.fragments.AddPrivateNoteFragment"
+        android:label="Create a private note"
+        tools:layout="@layout/fragment_add_private_note">
+        <action
+            android:id="@+id/action_addPrivateNoteFragment_to_privateNotesFragment"
+            app:destination="@id/privateNotesFragment" />
+    </fragment>
 </navigation>

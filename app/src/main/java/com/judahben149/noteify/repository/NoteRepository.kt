@@ -43,4 +43,8 @@ class NoteRepository(private val noteDao: NoteDao) {
     suspend fun addPrivateNote(note: PrivateNote) {
         noteDao.addPrivateNote(note)
     }
+
+    suspend fun deletePrivateNote(note: PrivateNote) {
+        noteDao.deletePrivateNote(note)
+    }
 }

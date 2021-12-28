@@ -48,6 +48,9 @@ interface NoteDao {
     @Query("SELECT * FROM private_note ORDER BY id ASC")
     fun readAllPrivateNotes(): LiveData<List<PrivateNote>>
 
+    @Delete
+    suspend fun deletePrivateNote(note: PrivateNote)
+
     @Query("DELETE FROM private_note")
     suspend fun deleteAllPrivateNotes()
 
