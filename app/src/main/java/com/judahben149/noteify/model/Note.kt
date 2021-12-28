@@ -14,5 +14,7 @@ data class Note(
     @ColumnInfo(name = "note_title")
     var noteTitle: String,
     @ColumnInfo(name = "note_body")
-    var noteBody: String
+    var noteBody: String,
+    @ColumnInfo(name = "favorite_status")
+    var favoriteStatus: Boolean = false
 ): Parcelable

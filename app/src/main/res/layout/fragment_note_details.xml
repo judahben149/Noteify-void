@@ -2,70 +2,98 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_note_details"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
+
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/note_title_NoteDetailsScreen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@android:color/transparent"
+        android:hint="@string/enter_note_title"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/noteDetails_Divider"
+        android:layout_width="match_parent"
+        android:layout_height="0.9dp"
+        android:layout_marginHorizontal="20dp"
+        app:dividerColor="#BDBDBD"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/note_title_NoteDetailsScreen"
+
+        />
+
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/noteDetails_Divider">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/note_body_NoteDetailsScreen"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@android:color/transparent"
+            android:hint="@string/enter_note_body"
+            android:textSize="17sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/note_title_NoteDetailsScreen"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="10dp"
-                android:hint="@string/enter_note_title"
-                android:textSize="22sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <EditText
-                android:id="@+id/note_body_NoteDetailsScreen"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="10dp"
-                android:hint="@string/enter_note_body"
-                android:textSize="17sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/note_title_NoteDetailsScreen" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Update"
-                app:layout_constraintTop_toBottomOf="@id/note_body_NoteDetailsScreen"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="45dp"
-                android:id="@+id/btn_saveNote_NoteDetailsScreen"
-                android:layout_marginTop="15dp"
-                />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cancel"
-                android:backgroundTint="#AAAAAA"
-                app:layout_constraintTop_toBottomOf="@id/note_body_NoteDetailsScreen"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="45dp"
-                android:id="@+id/btn_cancel_NoteDetailsScreen"
-                android:layout_marginTop="15dp"
-                />
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+    <Button
+        android:id="@+id/btn_saveNote_NoteDetailsScreen"
+        style="@style/MyButtonStyle_Primary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="45dp"
+        android:layout_marginBottom="20dp"
+        android:text="Update"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btn_cancel_NoteDetailsScreen"
+        style="@style/MyButtonStyle_Secondary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="20dp"
+        android:text="Cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_addToFavorites_NoteDetailsScreen"
+        style="@style/MyButtonStyle_Secondary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="Favorite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_saveNote_NoteDetailsScreen"
+        app:layout_constraintStart_toEndOf="@id/btn_cancel_NoteDetailsScreen" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

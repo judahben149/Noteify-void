@@ -11,4 +11,10 @@
     <color name="swipeDelete">#FF3535</color>
     <color name="swipePin">#00E331</color>
     <color name="selectedItemColor">#C3C3C3</color>
+
+    <color name="blue">#366ED8</color>
+    <color name="blue_variant">#1F5DD1</color>
+    <color name="blue_tint">#F6F9FF</color>
+
+    <color name="grey_tint">#FAFAFA</color>
 </resources>

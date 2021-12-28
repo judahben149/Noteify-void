@@ -4,9 +4,11 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.judahben149.noteify.model.DeletedNote
 import com.judahben149.noteify.model.Note
+import com.judahben149.noteify.model.PrivateNote
 
-@Database(entities = [Note::class], exportSchema = false, version = 1)
+@Database(entities = [Note::class, DeletedNote::class, PrivateNote::class], exportSchema = false, version = 1)
 abstract class NoteDatabase : RoomDatabase() {
 
     abstract fun noteDao(): NoteDao
