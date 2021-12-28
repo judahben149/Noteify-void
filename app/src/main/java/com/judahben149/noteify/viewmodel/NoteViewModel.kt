@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.judahben149.noteify.data.NoteDatabase
-import com.judahben149.noteify.model.FavoriteNote
+import com.judahben149.noteify.model.DeletedNote
 import com.judahben149.noteify.model.Note
 import com.judahben149.noteify.repository.NoteRepository
 import kotlinx.coroutines.Dispatchers
@@ -15,6 +15,7 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
 
     val readAllNotes: LiveData<List<Note>>
     val readAllFavoriteNote: LiveData<List<Note>>
+    val readAllDeletedNotes: LiveData<List<DeletedNote>>
     private val repository: NoteRepository
 
 //    val isNoteFavorite: Boolean = false
@@ -24,6 +25,7 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
         repository = NoteRepository(noteDao)
         readAllNotes = repository.readAllNotes
         readAllFavoriteNote = repository.readAllFavoriteNotes
+        readAllDeletedNotes = repository.readAllDeletedNotes
     }
 
     fun addNote(note: Note) {
@@ -50,33 +52,16 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-//    fun countDownDeleteNote() {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            Thread.sleep(5000)
-//        }
-//    }
 
     fun searchDatabase(searchQuery: String): LiveData<List<Note>> {
         return  repository.searchDatabase(searchQuery)
     }
 
-    //methods for favorite notes
+    //methods for deleted notes
+    fun addDeletedNote(note: DeletedNote) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.addDeletedNote(note)
+        }
+    }
 
-//    fun addFavoriteNote(note: FavoriteNote) {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            repository.addFavoriteNote(note)
-//        }
-//    }
-//
-//    fun updateFavoriteNote(note: FavoriteNote) {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            repository.updateFavoriteNote(note)
-//        }
-//    }
-//
-//    fun deleteFavoriteNote(note: FavoriteNote) {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            repository.deleteFavoriteNote(note)
-//        }
-//    }
 }

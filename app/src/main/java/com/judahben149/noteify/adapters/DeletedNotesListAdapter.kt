@@ -1,20 +1,22 @@
 package com.judahben149.noteify.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.judahben149.noteify.databinding.FragmentNoteItemBinding
+import com.judahben149.noteify.model.DeletedNote
 import com.judahben149.noteify.model.Note
 
-class FavoriteNotesAdapter(): RecyclerView.Adapter<FavoriteNotesAdapter.FavoriteNotesViewHolder>() {
+class DeletedNotesListAdapter() : RecyclerView.Adapter<DeletedNotesListAdapter.DeletedNotesListViewHolder>() {
 
-    var favNoteList = emptyList<Note>()
+    var deletedNotes = emptyList<DeletedNote>()
 
+    inner class DeletedNotesListViewHolder(private val binding: FragmentNoteItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-    inner class FavoriteNotesViewHolder(private val binding: FragmentNoteItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bindItem(position: Int) {
-            val currentNote = favNoteList[position]
+            val currentNote = deletedNotes[position]
 
             binding.tvNoteTitle.text = currentNote.noteTitle
             binding.tvNoteDescription.text = currentNote.noteBody
@@ -25,20 +27,19 @@ class FavoriteNotesAdapter(): RecyclerView.Adapter<FavoriteNotesAdapter.Favorite
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteNotesViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeletedNotesListViewHolder {
         val binding = FragmentNoteItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return FavoriteNotesViewHolder(binding)
+        return DeletedNotesListViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: FavoriteNotesViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: DeletedNotesListViewHolder, position: Int) {
         holder.bindItem(position)
     }
 
-    override fun getItemCount() = favNoteList.size
+    override fun getItemCount() = deletedNotes.size
 
-
-    fun setData(note: List<Note>) {
-        this.favNoteList = note
+    fun setData(note: List<DeletedNote>) {
+        this.deletedNotes = note
         notifyDataSetChanged()
     }
 }

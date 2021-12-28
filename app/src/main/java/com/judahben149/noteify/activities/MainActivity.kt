@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navView: NavigationView
-    private lateinit var toolbar: androidx.appcompat.widget.Toolbar
 
     lateinit var toggle: ActionBarDrawerToggle
 
@@ -48,28 +47,14 @@ class MainActivity : AppCompatActivity() {
         //initialize variables here
         navView = binding.navigationView
         drawerLayout = binding.drawerLayout
-        toolbar = binding.toolBar
+        setSupportActionBar(binding.toolBar)
 
         navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView2) as NavHostFragment
         navController = navHostFragment.navController
 
-
-//        toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.drawer_open, R.string.drawer_close)
-//        drawerLayout.addDrawerListener(toggle)
-//        toggle.syncState()
-
-        appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.noteListFragment,
-                R.id.favoritesFragment,
-                R.id.privateNotesFragment,
-                R.id.deletedNotesFragment,
-
-            ), drawerLayout)
-
+        appBarConfiguration = AppBarConfiguration(navView.menu, drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
-//        setSupportActionBar(toolbar)
-//        toolbar.setupWithNavController(navController, appBarConfiguration)
+
 
         navView.setupWithNavController(navController)
 

@@ -55,8 +55,12 @@
         android:label="Private"
         tools:layout="@layout/fragment_private_notes" />
     <fragment
-        android:id="@+id/deletedNotesFragment"
-        android:name="com.judahben149.noteify.fragments.DeletedNotesFragment"
+        android:id="@+id/deletedNotesListFragment"
+        android:name="com.judahben149.noteify.fragments.DeletedNotesListFragment"
         android:label="Trash"
-        tools:layout="@layout/fragment_deleted_notes" />
+        tools:layout="@layout/fragment_deleted_notes_list" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.judahben149.noteify.fragments.SettingsFragment"
+        android:label="Settings"/>
 </navigation>

@@ -15,6 +15,7 @@
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/custom_action_bar.xml" value="0.2046875" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/fragment_add_note.xml" value="0.2046875" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/fragment_deleted_notes.xml" value="0.2046875" />
+        <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/fragment_deleted_notes_list.xml" value="0.2046875" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/fragment_favorites.xml" value="0.2046875" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/fragment_item_list.xml" value="0.2046875" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/fragment_note_details.xml" value="0.25" />
@@ -24,7 +25,11 @@
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/nav_header.xml" value="0.2046875" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/note_details.xml" value="0.18385416666666668" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/menu/actionbar_menu.xml" value="0.75" />
+        <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/menu/deleted_notes_menu.xml" value="0.2046875" />
+        <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/menu/favorite_notes_menu.xml" value="0.2046875" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/menu/nav_drawer_menu.xml" value="0.2046875" />
+        <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/menu/note_details_menu.xml" value="0.2046875" />
+        <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/xml/root_preferences.xml" value="0.2046875" />
       </map>
     </option>
   </component>

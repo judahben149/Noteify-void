@@ -2,7 +2,7 @@ package com.judahben149.noteify.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.judahben149.noteify.model.FavoriteNote
+import com.judahben149.noteify.model.DeletedNote
 import com.judahben149.noteify.model.Note
 
 @Dao
@@ -29,18 +29,15 @@ interface NoteDao {
     @Query("SELECT * FROM note_table WHERE favorite_status = 1")
     fun readAllFavoriteNotes(): LiveData<List<Note>>
 
-//    ORDER BY id ASC")
 
-//    //methods for favorite notes
-//    @Query("SELECT * FROM favorite_note WHERE ORDER BY id ASC")
-//    fun readAllFavoriteNotes(): LiveData<List<FavoriteNote>>
-//
-//    @Insert(onConflict = OnConflictStrategy.IGNORE)
-//    suspend fun addFavoriteNote(note: FavoriteNote)
-//
-//    @Update
-//    suspend fun updateFavoriteNote(note: FavoriteNote)
-//
-//    @Delete
-//    suspend fun deleteFavoriteNote(note: FavoriteNote)
+    //methods for deleted notes
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun addDeletedNote(note: DeletedNote)
+
+    @Query("SELECT * FROM deleted_note ORDER BY id ASC")
+    fun readAllDeletedNotes(): LiveData<List<DeletedNote>>
+
+    @Query("DELETE FROM deleted_note")
+    suspend fun deleteAllDeletedNotes()
+
 }

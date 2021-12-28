@@ -7,12 +7,18 @@ import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-@Entity(tableName = "favorite_note")
-data class FavoriteNote(
+@Entity(tableName = "deleted_note")
+
+data class DeletedNote(
     @PrimaryKey(autoGenerate = true)
     var id: Int = 1,
-    @ColumnInfo(name = "note_title")
+    @ColumnInfo(name = "deleted_note_title")
     var noteTitle: String,
-    @ColumnInfo(name = "note_body")
+    @ColumnInfo(name = "deleted_note_body")
     var noteBody: String,
+    @ColumnInfo(name = "date_deleted")
+    var dateDeleted: String = "",
+    @ColumnInfo(name = "date_created")
+    var dateCreated: String = ""
 ) : Parcelable
+

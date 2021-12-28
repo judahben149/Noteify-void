@@ -33,6 +33,9 @@ class NoteListFragment : Fragment() { //, androidx.appcompat.widget.SearchView.O
     val adapter = NoteListRecyclerViewAdapter()
     private var tracker: SelectionTracker<Long>? = null
 
+    private val noteObject = emptyList<Note>()
+    val numberOfNotes = noteObject.size
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -106,6 +109,8 @@ class NoteListFragment : Fragment() { //, androidx.appcompat.widget.SearchView.O
         setHasOptionsMenu(true)
         return binding.root
     }
+
+
 
     private fun recyclerViewDivider(rvList: RecyclerView, layoutManager: LinearLayoutManager) {
         //this adds the divider line in between each item
@@ -198,32 +203,11 @@ class NoteListFragment : Fragment() { //, androidx.appcompat.widget.SearchView.O
     }
 
 
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        inflater.inflate(R.menu.actionbar_menu, menu)
-//
-//        val search = menu.findItem(R.id.menu_search)
-//        val searchView = search.actionView as? androidx.appcompat.widget.SearchView
-//        searchView?.isSubmitButtonEnabled = true
-//        searchView?.setOnQueryTextListener(this)
-//
-//        //return true
-//    }
-//
-//
-//    override fun onQueryTextSubmit(query: String?): Boolean {
-//        if (query != null) {
-//            searchDatabase(query)
-//        }
-//        return true
-//    }
-//
-//    override fun onQueryTextChange(query: String?): Boolean {
-//        if (query != null) {
-//            searchDatabase(query)
-//        }
-//        return true
-//    }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.note_list_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.menu_deleteAllNotes) {
@@ -247,11 +231,6 @@ class NoteListFragment : Fragment() { //, androidx.appcompat.widget.SearchView.O
         outState.putString("CHECK", myString1)
         Log.d("CHECK", "String is saved")
         tracker?.onSaveInstanceState(outState)
-    }
-
-
-    private fun snackBarDeleteAction() {
-
     }
 
 }

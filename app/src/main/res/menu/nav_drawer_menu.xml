@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single" >
+
+    <group
+        android:checkableBehavior="single" >
 
         <item android:id="@+id/noteListFragment"
             android:title="@string/all_notes"
@@ -15,7 +17,7 @@
             android:title="@string/private_string"
             android:icon="@drawable/ic_locked_folder" />
 
-        <item android:id="@+id/deletedNotesFragment"
+        <item android:id="@+id/deletedNotesListFragment"
             android:title="@string/trash"
             android:icon="@drawable/ic_trash_can" />
 
@@ -23,9 +25,8 @@
 
     <item android:title="@string/other" >
         <menu >
-
-            <item android:id="@+id/nav_account_settings"
-                android:title="@string/account_settings"
+            <item android:id="@+id/settingsFragment"
+                android:title="@string/settings"
                 android:icon="@drawable/ic_settings_gear" />
         </menu>
     </item>
