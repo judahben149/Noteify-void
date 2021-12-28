@@ -4,14 +4,16 @@ import androidx.lifecycle.LiveData
 import com.judahben149.noteify.data.NoteDao
 import com.judahben149.noteify.model.DeletedNote
 import com.judahben149.noteify.model.Note
+import com.judahben149.noteify.model.PrivateNote
 
 class NoteRepository(private val noteDao: NoteDao) {
 
     val readAllNotes: LiveData<List<Note>> = noteDao.readAllNotes()
     val readAllFavoriteNotes: LiveData<List<Note>> = noteDao.readAllFavoriteNotes()
     val readAllDeletedNotes: LiveData<List<DeletedNote>> = noteDao.readAllDeletedNotes()
+    val readAllPrivateNotes: LiveData<List<PrivateNote>> = noteDao.readAllPrivateNotes()
 
-    suspend fun addNote(note: Note){
+    suspend fun addNote(note: Note) {
         noteDao.addNote(note)
     }
 
@@ -33,7 +35,12 @@ class NoteRepository(private val noteDao: NoteDao) {
 
 
     //methods for deleted note
-    suspend fun addDeletedNote(note: DeletedNote){
+    suspend fun addDeletedNote(note: DeletedNote) {
         noteDao.addDeletedNote(note)
+    }
+
+    //methods for private note
+    suspend fun addPrivateNote(note: PrivateNote) {
+        noteDao.addPrivateNote(note)
     }
 }

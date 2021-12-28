@@ -66,7 +66,9 @@ class NoteDetailsFragment: Fragment() {
                 isNoteFavorite = true
             } else if (item.itemId == R.id.deleteNote){
                 deleteNote()
+            Navigation.findNavController(binding.root).navigate(R.id.action_noteDetailsFragment_to_noteListFragment)
             Snackbar.make(binding.root, "Note added to trash", Snackbar.LENGTH_SHORT).show()
+
         }
         return super.onOptionsItemSelected(item)
     }

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.judahben149.noteify.model.DeletedNote
 import com.judahben149.noteify.model.Note
+import com.judahben149.noteify.model.PrivateNote
 
 @Dao
 interface NoteDao {
@@ -39,5 +40,15 @@ interface NoteDao {
 
     @Query("DELETE FROM deleted_note")
     suspend fun deleteAllDeletedNotes()
+
+    //methods for private notes
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun addPrivateNote(note: PrivateNote)
+
+    @Query("SELECT * FROM private_note ORDER BY id ASC")
+    fun readAllPrivateNotes(): LiveData<List<PrivateNote>>
+
+    @Query("DELETE FROM private_note")
+    suspend fun deleteAllPrivateNotes()
 
 }
