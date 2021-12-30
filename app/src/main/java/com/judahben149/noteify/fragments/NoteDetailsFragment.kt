@@ -19,6 +19,7 @@ class NoteDetailsFragment: Fragment() {
 
     private var _binding: FragmentNoteDetailsBinding? = null
     private val binding get() = _binding!!
+
     private val args by navArgs<NoteDetailsFragmentArgs>()
     private lateinit var mViewmodel: NoteViewModel
 

@@ -12,13 +12,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.judahben149.noteify.R
 import com.judahben149.noteify.adapters.DeletedNotesListAdapter
 import com.judahben149.noteify.adapters.PrivateNotesAdapter
+import com.judahben149.noteify.databinding.FragmentAddPrivateNoteBinding
 import com.judahben149.noteify.databinding.FragmentDeletedNotesListBinding
 import com.judahben149.noteify.databinding.FragmentPrivateNotesBinding
 import com.judahben149.noteify.viewmodel.NoteViewModel
 
 class PrivateNotesFragment : Fragment() {
 
-    private lateinit var binding: FragmentPrivateNotesBinding
+    private var _binding: FragmentPrivateNotesBinding? = null
+    private val binding get() = _binding!!
     private val adapter = PrivateNotesAdapter()
     private lateinit var rvList: RecyclerView
     private lateinit var mViewModel: NoteViewModel
@@ -27,7 +29,7 @@ class PrivateNotesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentPrivateNotesBinding.inflate(inflater, container, false)
+        _binding = FragmentPrivateNotesBinding.inflate(inflater, container, false)
 
         rvList = binding.rvPrivateNotes
         rvList.adapter = adapter
@@ -38,6 +40,12 @@ class PrivateNotesFragment : Fragment() {
         setHasOptionsMenu(true)
 
         return binding.root
+    }
+
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
     }
 
 

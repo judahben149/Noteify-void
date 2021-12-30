@@ -11,6 +11,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.judahben149.noteify.R
+import com.judahben149.noteify.databinding.FragmentAddPrivateNoteBinding
 import com.judahben149.noteify.databinding.FragmentNoteDetailsBinding
 import com.judahben149.noteify.databinding.FragmentPrivateNoteDetailsBinding
 import com.judahben149.noteify.hideKeyboard
@@ -21,7 +22,8 @@ import com.judahben149.noteify.viewmodel.NoteViewModel
 
 class PrivateNoteDetailsFragment : Fragment() {
 
-    private lateinit var binding: FragmentPrivateNoteDetailsBinding
+    private var _binding: FragmentPrivateNoteDetailsBinding? = null
+    private val binding get() = _binding!!
     private val args by navArgs<PrivateNoteDetailsFragmentArgs>()
     private lateinit var mViewmodel: NoteViewModel
 
@@ -32,7 +34,7 @@ class PrivateNoteDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentPrivateNoteDetailsBinding.inflate(inflater, container, false)
+        _binding = FragmentPrivateNoteDetailsBinding.inflate(inflater, container, false)
 
         setHasOptionsMenu(true)
         return binding.root
@@ -80,6 +82,12 @@ class PrivateNoteDetailsFragment : Fragment() {
 
         }
         return super.onOptionsItemSelected(item)
+    }
+
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
     }
 
 

@@ -8,6 +8,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.judahben149.noteify.R
+import com.judahben149.noteify.databinding.FragmentAddPrivateNoteBinding
 import com.judahben149.noteify.databinding.FragmentDeletedNoteDetailsBinding
 import com.judahben149.noteify.hideKeyboard
 import com.judahben149.noteify.model.DeletedNote
@@ -18,7 +19,8 @@ import com.judahben149.noteify.viewmodel.NoteViewModel
 
 class DeletedNoteDetailsFragment : Fragment() {
 
-    private lateinit var binding: FragmentDeletedNoteDetailsBinding
+    private var _binding: FragmentDeletedNoteDetailsBinding? = null
+    private val binding get() = _binding!!
     private val args by navArgs<DeletedNoteDetailsFragmentArgs>()
     private lateinit var mViewmodel: NoteViewModel
 
@@ -26,7 +28,7 @@ class DeletedNoteDetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentDeletedNoteDetailsBinding.inflate(inflater, container, false)
+        _binding = FragmentDeletedNoteDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -69,6 +71,12 @@ class DeletedNoteDetailsFragment : Fragment() {
 
         }
         return super.onOptionsItemSelected(item)
+    }
+
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
     }
 
 

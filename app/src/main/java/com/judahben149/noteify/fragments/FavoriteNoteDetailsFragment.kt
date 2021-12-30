@@ -9,6 +9,7 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.judahben149.noteify.R
 import com.judahben149.noteify.databinding.FragmentFavoriteNoteDetailsBinding
+import com.judahben149.noteify.databinding.FragmentNoteDetailsBinding
 import com.judahben149.noteify.databinding.FragmentPrivateNoteDetailsBinding
 import com.judahben149.noteify.hideKeyboard
 import com.judahben149.noteify.model.DeletedNote
@@ -18,7 +19,8 @@ import com.judahben149.noteify.viewmodel.NoteViewModel
 
 class FavoriteNoteDetailsFragment : Fragment() {
 
-    private lateinit var binding: FragmentFavoriteNoteDetailsBinding
+    private var _binding: FragmentFavoriteNoteDetailsBinding? = null
+    private val binding get() = _binding!!
     private val args by navArgs<FavoriteNoteDetailsFragmentArgs>()
     private lateinit var mViewmodel: NoteViewModel
 
@@ -29,7 +31,7 @@ class FavoriteNoteDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentFavoriteNoteDetailsBinding.inflate(inflater, container, false)
+        _binding = FragmentFavoriteNoteDetailsBinding.inflate(inflater, container, false)
 
         setHasOptionsMenu(true)
         return binding.root
@@ -79,6 +81,12 @@ class FavoriteNoteDetailsFragment : Fragment() {
             Snackbar.make(binding.root, "Note sent to trash", Snackbar.LENGTH_SHORT).show()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
     }
 
 

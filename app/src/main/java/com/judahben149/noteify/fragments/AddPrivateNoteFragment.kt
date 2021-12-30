@@ -11,6 +11,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.judahben149.noteify.R
 import com.judahben149.noteify.databinding.FragmentAddNoteBinding
 import com.judahben149.noteify.databinding.FragmentAddPrivateNoteBinding
+import com.judahben149.noteify.databinding.FragmentNoteDetailsBinding
 import com.judahben149.noteify.hideKeyboard
 import com.judahben149.noteify.model.Note
 import com.judahben149.noteify.model.PrivateNote
@@ -19,14 +20,15 @@ import com.judahben149.noteify.viewmodel.NoteViewModel
 
 class AddPrivateNoteFragment : Fragment() {
 
-    private lateinit var binding: FragmentAddPrivateNoteBinding
+    private var _binding: FragmentAddPrivateNoteBinding? = null
+    private val binding get() = _binding!!
     private lateinit var mViewmodel: NoteViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentAddPrivateNoteBinding.inflate(inflater, container, false)
+        _binding = FragmentAddPrivateNoteBinding.inflate(inflater, container, false)
         mViewmodel = ViewModelProvider(this).get(NoteViewModel::class.java)
         return binding.root
     }
@@ -49,6 +51,10 @@ class AddPrivateNoteFragment : Fragment() {
     }
 
 
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
 
 
     private fun insertNoteToDatabase() {

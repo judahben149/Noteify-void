@@ -10,12 +10,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.judahben149.noteify.R
 import com.judahben149.noteify.adapters.DeletedNotesListAdapter
+import com.judahben149.noteify.databinding.FragmentAddPrivateNoteBinding
 import com.judahben149.noteify.databinding.FragmentDeletedNotesListBinding
 import com.judahben149.noteify.viewmodel.NoteViewModel
 
 class DeletedNotesListFragment : Fragment() {
 
-    private lateinit var binding: FragmentDeletedNotesListBinding
+    private var _binding: FragmentDeletedNotesListBinding? = null
+    private val binding get() = _binding!!
     private val adapter = DeletedNotesListAdapter()
     private lateinit var rvList: RecyclerView
     private lateinit var mViewModel: NoteViewModel
@@ -24,7 +26,7 @@ class DeletedNotesListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentDeletedNotesListBinding.inflate(inflater, container, false)
+        _binding = FragmentDeletedNotesListBinding.inflate(inflater, container, false)
 
         rvList = binding.rvDeletedNotesList
         rvList.adapter = adapter
@@ -40,6 +42,11 @@ class DeletedNotesListFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.deleted_notes_menu, menu)
+    }
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
     }
 
 

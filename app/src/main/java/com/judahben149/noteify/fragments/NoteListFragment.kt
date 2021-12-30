@@ -22,13 +22,15 @@ import com.judahben149.noteify.NoteLookup
 import com.judahben149.noteify.adapters.NoteListRecyclerViewAdapter
 import com.judahben149.noteify.R
 import com.judahben149.noteify.adapters.NoteListAdapterSwipeGestures
+import com.judahben149.noteify.databinding.FragmentNoteDetailsBinding
 import com.judahben149.noteify.databinding.FragmentNoteListBinding
 import com.judahben149.noteify.model.Note
 import com.judahben149.noteify.viewmodel.NoteViewModel
 
 class NoteListFragment : Fragment() { //, androidx.appcompat.widget.SearchView.OnQueryTextListener {
 
-    private lateinit var binding: FragmentNoteListBinding
+    private var _binding: FragmentNoteListBinding? = null
+    private val binding get() = _binding!!
     private lateinit var mViewModel: NoteViewModel
     val adapter = NoteListRecyclerViewAdapter()
     private var tracker: SelectionTracker<Long>? = null
@@ -42,7 +44,7 @@ class NoteListFragment : Fragment() { //, androidx.appcompat.widget.SearchView.O
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentNoteListBinding.inflate(inflater, container, false)
+        _binding = FragmentNoteListBinding.inflate(inflater, container, false)
 
         setHasOptionsMenu(true)
         return binding.root
@@ -103,6 +105,11 @@ class NoteListFragment : Fragment() { //, androidx.appcompat.widget.SearchView.O
                 .navigate(R.id.action_noteListFragment_to_addNoteFragment)
         }
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
     }
 
 
