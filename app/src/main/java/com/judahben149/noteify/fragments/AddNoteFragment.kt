@@ -10,6 +10,7 @@ import androidx.navigation.Navigation
 import com.google.android.material.snackbar.Snackbar
 import com.judahben149.noteify.R
 import com.judahben149.noteify.databinding.FragmentAddNoteBinding
+import com.judahben149.noteify.hideKeyboard
 import com.judahben149.noteify.model.Note
 import com.judahben149.noteify.viewmodel.NoteViewModel
 
@@ -31,15 +32,18 @@ class AddNoteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         binding.btnCancelAddNoteScreen.setOnClickListener {
+            hideKeyboard()
             Navigation.findNavController(binding.root).navigate(R.id.action_addNoteFragment_to_noteListFragment)
         }
 
         binding.btnSaveNoteAddNoteScreen.setOnClickListener {
+            hideKeyboard()
             insertNoteToDatabase()
         }
 
         binding.btnAddToFavoritesAddNoteScreen.setOnClickListener {
             addNoteToFavoritesDatabase()
+            hideKeyboard()
             Snackbar.make(binding.root, "Note added to favorites", Snackbar.LENGTH_SHORT).show()
         }
 

@@ -2,6 +2,7 @@ package com.judahben149.noteify.fragments
 
 import android.os.Bundle
 import android.view.*
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -9,13 +10,15 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.judahben149.noteify.R
 import com.judahben149.noteify.databinding.FragmentNoteDetailsBinding
+import com.judahben149.noteify.hideKeyboard
 import com.judahben149.noteify.model.DeletedNote
 import com.judahben149.noteify.model.Note
 import com.judahben149.noteify.viewmodel.NoteViewModel
 
 class NoteDetailsFragment: Fragment() {
 
-    private lateinit var binding: FragmentNoteDetailsBinding
+    private var _binding: FragmentNoteDetailsBinding? = null
+    private val binding get() = _binding!!
     private val args by navArgs<NoteDetailsFragmentArgs>()
     private lateinit var mViewmodel: NoteViewModel
 
@@ -26,9 +29,17 @@ class NoteDetailsFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentNoteDetailsBinding.inflate(inflater, container, false)
-
+        _binding = FragmentNoteDetailsBinding.inflate(inflater, container, false)
         setHasOptionsMenu(true)
+
+
+//        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+//            override fun handleOnBackPressed() {
+//                hideKeyboard()
+//                updateNoteInDatabase(isNoteFavorite)
+//                navigateToListFragment()
+//            }
+//        })
         return binding.root
     }
 
@@ -42,12 +53,14 @@ class NoteDetailsFragment: Fragment() {
         isNoteFavorite = args.currentNote.favoriteStatus
 
         binding.btnCancelNoteDetailsScreen.setOnClickListener {
-            Navigation.findNavController(binding.root).navigate(R.id.action_noteDetailsFragment_to_noteListFragment)
+            hideKeyboard()
+            navigateToListFragment()
         }
 
         binding.btnSaveNoteNoteDetailsScreen.setOnClickListener {
             updateNoteInDatabase(isNoteFavorite)
-            Navigation.findNavController(binding.root).navigate(R.id.action_noteDetailsFragment_to_noteListFragment)
+            hideKeyboard()
+            navigateToListFragment()
         }
 
         super.onViewCreated(view, savedInstanceState)
@@ -60,15 +73,15 @@ class NoteDetailsFragment: Fragment() {
     }
 
 
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.addToFavorites) {
                 Snackbar.make(binding.root, "Note added to favorites", Snackbar.LENGTH_SHORT).show()
                 isNoteFavorite = true
             } else if (item.itemId == R.id.deleteNote){
                 deleteNote()
-            Navigation.findNavController(binding.root).navigate(R.id.action_noteDetailsFragment_to_noteListFragment)
-            Snackbar.make(binding.root, "Note added to trash", Snackbar.LENGTH_SHORT).show()
-
+                navigateToListFragment()
+                Snackbar.make(binding.root, "Note added to trash", Snackbar.LENGTH_SHORT).show()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -76,10 +89,15 @@ class NoteDetailsFragment: Fragment() {
 
     override fun onPause() {
         //this saves the note once the fragment loses focus or is going to be destroyed. Acts for Auto-save
+        hideKeyboard()
         updateNoteInDatabase(isNoteFavorite)
         super.onPause()
     }
 
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
 
     private fun updateNoteInDatabase(favoriteStatus: Boolean) {
         val noteTitle = binding.noteTitleNoteDetailsScreen.text.toString()
@@ -98,5 +116,9 @@ class NoteDetailsFragment: Fragment() {
 
         mViewmodel.addDeletedNote(noteToAddToDeletedTable)
         mViewmodel.deleteNote(noteToDeleteFromNoteTable)
+    }
+
+    private fun navigateToListFragment() {
+        Navigation.findNavController(binding.root).navigate(R.id.action_noteDetailsFragment_to_noteListFragment)
     }
 }

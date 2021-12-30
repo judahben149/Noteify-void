@@ -37,7 +37,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navView: NavigationView
 
-    lateinit var toggle: ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,55 +54,14 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navView.menu, drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-
         navView.setupWithNavController(navController)
 
         mViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
     }
 
+
     override fun onSupportNavigateUp(): Boolean {
         val navController = navHostFragment.navController
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
-    }
-
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        val inflater = menuInflater
-//        inflater.inflate(R.menu.actionbar_menu, menu)
-//        return super.onCreateOptionsMenu(menu)
-//    }
-//
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//
-//        when(item.itemId) {
-//            R.id.menu_deleteAllNotes -> {
-//                deleteAllNotes()
-//                return true
-//            }
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
-
-
-    private fun deleteAllNotes() {
-        val builder = AlertDialog.Builder(this)
-
-        builder.apply {
-
-            setPositiveButton(Html.fromHtml("<font color='#1F5DD1'>Yes</font>")) { _, _ ->
-                mViewModel.deleteAllNotes()
-                Snackbar.make(binding.root, "Successfully deleted all notes", Snackbar.LENGTH_LONG)
-                    .show()
-
-            }
-            setNegativeButton(Html.fromHtml("<font color='#1F5DD1'>No</font>")) { _, _ ->
-
-            }
-
-            setTitle("Delete all notes")
-            setMessage("Are you sure you want to delete all notes?")
-            setIcon(R.drawable.ic_delete)
-            create()
-            show()
-        }
     }
 }

@@ -2,13 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/layout_note_details"
+    android:id="@+id/layout_private_note_details"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/note_title_NoteDetailsScreen"
+        android:id="@+id/note_title_PrivateNoteDetailsScreen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
@@ -23,14 +23,14 @@
 
 
     <com.google.android.material.divider.MaterialDivider
-        android:id="@+id/noteDetails_Divider"
+        android:id="@+id/privateNoteDetails_Divider"
         android:layout_width="match_parent"
         android:layout_height="0.9dp"
         android:layout_marginHorizontal="20dp"
         app:dividerColor="#BDBDBD"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/note_title_NoteDetailsScreen"
+        app:layout_constraintTop_toBottomOf="@id/note_title_PrivateNoteDetailsScreen"
 
         />
 
@@ -42,11 +42,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/noteDetails_Divider">
+        app:layout_constraintTop_toBottomOf="@+id/privateNoteDetails_Divider">
 
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/note_body_NoteDetailsScreen"
+            android:id="@+id/note_body_PrivateNoteDetailsScreen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
@@ -62,7 +62,7 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/btn_saveNote_NoteDetailsScreen"
+        android:id="@+id/btn_saveNote_PrivateNoteDetailsScreen"
         style="@style/MyButtonStyle_Primary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
-        android:id="@+id/btn_cancel_NoteDetailsScreen"
+        android:id="@+id/btn_cancel_PrivateNoteDetailsScreen"
         style="@style/MyButtonStyle_Secondary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -85,16 +85,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/btn_addToFavorites_NoteDetailsScreen"
-        style="@style/MyButtonStyle_Secondary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="Favorite"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btn_saveNote_NoteDetailsScreen"
-        app:layout_constraintStart_toEndOf="@id/btn_cancel_NoteDetailsScreen" />
+<!--    <Button-->
+<!--        android:id="@+id/btn_addToFavorites_NoteDetailsScreen"-->
+<!--        style="@style/MyButtonStyle_Secondary"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginBottom="20dp"-->
+<!--        android:text="Favorite"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toStartOf="@id/btn_saveNote_NoteDetailsScreen"-->
+<!--        app:layout_constraintStart_toEndOf="@id/btn_cancel_NoteDetailsScreen" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

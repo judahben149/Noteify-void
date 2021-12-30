@@ -8,7 +8,7 @@
 
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/note_title_NoteDetailsScreen"
+        android:id="@+id/note_title_FavoriteNoteDetailsScreen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
@@ -23,14 +23,14 @@
 
 
     <com.google.android.material.divider.MaterialDivider
-        android:id="@+id/noteDetails_Divider"
+        android:id="@+id/favoriteNoteDetails_Divider"
         android:layout_width="match_parent"
         android:layout_height="0.9dp"
         android:layout_marginHorizontal="20dp"
         app:dividerColor="#BDBDBD"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/note_title_NoteDetailsScreen"
+        app:layout_constraintTop_toBottomOf="@id/note_title_FavoriteNoteDetailsScreen"
 
         />
 
@@ -42,11 +42,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/noteDetails_Divider">
+        app:layout_constraintTop_toBottomOf="@+id/favoriteNoteDetails_Divider">
 
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/note_body_NoteDetailsScreen"
+            android:id="@+id/note_body_FavoriteNoteDetailsScreen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
@@ -62,7 +62,7 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/btn_saveNote_NoteDetailsScreen"
+        android:id="@+id/btn_saveNote_FavoriteNoteDetailsScreen"
         style="@style/MyButtonStyle_Primary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
-        android:id="@+id/btn_cancel_NoteDetailsScreen"
+        android:id="@+id/btn_cancel_FavoriteNoteDetailsScreen"
         style="@style/MyButtonStyle_Secondary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btn_addToFavorites_NoteDetailsScreen"
+        android:id="@+id/btn_addToFavorites_FavoriteNoteDetailsScreen"
         style="@style/MyButtonStyle_Secondary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -94,7 +94,7 @@
         android:text="Favorite"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btn_saveNote_NoteDetailsScreen"
-        app:layout_constraintStart_toEndOf="@id/btn_cancel_NoteDetailsScreen" />
+        app:layout_constraintEnd_toStartOf="@id/btn_saveNote_FavoriteNoteDetailsScreen"
+        app:layout_constraintStart_toEndOf="@id/btn_cancel_FavoriteNoteDetailsScreen" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

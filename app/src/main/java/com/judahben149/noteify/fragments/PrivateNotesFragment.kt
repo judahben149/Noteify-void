@@ -5,6 +5,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -68,6 +69,15 @@ class PrivateNotesFragment : Fragment() {
         mViewModel.readAllPrivateNotes.observe(viewLifecycleOwner, Observer { note ->
             adapter.setData(note)
         })
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.fabAddPrivateNoteButton.setOnClickListener {
+            Navigation.findNavController(binding.root)
+                .navigate(R.id.action_privateNotesFragment_to_addPrivateNoteFragment)
+        }
+        super.onViewCreated(view, savedInstanceState)
     }
 
 }

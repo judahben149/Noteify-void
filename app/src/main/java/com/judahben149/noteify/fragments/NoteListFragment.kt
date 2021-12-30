@@ -34,7 +34,7 @@ class NoteListFragment : Fragment() { //, androidx.appcompat.widget.SearchView.O
     private var tracker: SelectionTracker<Long>? = null
 
     private val noteObject = emptyList<Note>()
-    val numberOfNotes = noteObject.size
+//    val numberOfNotes = noteObject.size
 
 
     override fun onCreateView(
@@ -44,13 +44,12 @@ class NoteListFragment : Fragment() { //, androidx.appcompat.widget.SearchView.O
     ): View? {
         binding = FragmentNoteListBinding.inflate(inflater, container, false)
 
+        setHasOptionsMenu(true)
+        return binding.root
+    }
 
-        if (savedInstanceState != null) {
-            val myString = savedInstanceState.getString("CHECK", "nothing found here")
-            Log.d("CHECK", myString)
-            tracker?.onRestoreInstanceState(savedInstanceState)
-        }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         val rvList = binding.rvList
         rvList.adapter = adapter
@@ -78,12 +77,7 @@ class NoteListFragment : Fragment() { //, androidx.appcompat.widget.SearchView.O
             rvList.layoutManager = this
         }
 
-        //instantiate viewmodel and set up observer
-        mViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
-        mViewModel.readAllNotes.observe(viewLifecycleOwner, Observer { note ->
-            adapter.setData(note)
-        })
-
+        setUpViewModelAndObserver()
         recyclerViewDivider(rvList, layoutManager)
         setUpSwipeGestures(rvList)
 
@@ -102,14 +96,24 @@ class NoteListFragment : Fragment() { //, androidx.appcompat.widget.SearchView.O
                 }
                 return true
             }
-
         })
 
-
-        setHasOptionsMenu(true)
-        return binding.root
+        binding.fabAddNoteButton.setOnClickListener {
+            Navigation.findNavController(binding.root)
+                .navigate(R.id.action_noteListFragment_to_addNoteFragment)
+        }
+        super.onViewCreated(view, savedInstanceState)
     }
 
+
+
+    private fun setUpViewModelAndObserver() {
+        //instantiate viewmodel and set up observer
+        mViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
+        mViewModel.readAllNotes.observe(viewLifecycleOwner, Observer { note ->
+            adapter.setData(note)
+        })
+    }
 
 
     private fun recyclerViewDivider(rvList: RecyclerView, layoutManager: LinearLayoutManager) {
@@ -194,15 +198,6 @@ class NoteListFragment : Fragment() { //, androidx.appcompat.widget.SearchView.O
         adapter.notifyDataSetChanged()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.fabAddNoteButton.setOnClickListener {
-            Navigation.findNavController(binding.root)
-                .navigate(R.id.action_noteListFragment_to_addNoteFragment)
-        }
-        super.onViewCreated(view, savedInstanceState)
-    }
-
-
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.note_list_menu, menu)
@@ -219,18 +214,7 @@ class NoteListFragment : Fragment() { //, androidx.appcompat.widget.SearchView.O
             }
 
         }
-
         return super.onOptionsItemSelected(item)
-    }
-
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-
-        val myString1 = "I survived man!"
-        outState.putString("CHECK", myString1)
-        Log.d("CHECK", "String is saved")
-        tracker?.onSaveInstanceState(outState)
     }
 
 }
