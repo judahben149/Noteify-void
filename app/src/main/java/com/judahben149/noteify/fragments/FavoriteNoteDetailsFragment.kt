@@ -1,17 +1,14 @@
 package com.judahben149.noteify.fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.view.*
-import android.view.inputmethod.InputMethodManager
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.judahben149.noteify.R
-import com.judahben149.noteify.databinding.FragmentNoteDetailsBinding
+import com.judahben149.noteify.databinding.FragmentFavoriteNoteDetailsBinding
 import com.judahben149.noteify.databinding.FragmentPrivateNoteDetailsBinding
 import com.judahben149.noteify.hideKeyboard
 import com.judahben149.noteify.model.DeletedNote
@@ -19,10 +16,10 @@ import com.judahben149.noteify.model.Note
 import com.judahben149.noteify.model.PrivateNote
 import com.judahben149.noteify.viewmodel.NoteViewModel
 
-class PrivateNoteDetailsFragment : Fragment() {
+class FavoriteNoteDetailsFragment : Fragment() {
 
-    private lateinit var binding: FragmentPrivateNoteDetailsBinding
-    private val args by navArgs<PrivateNoteDetailsFragmentArgs>()
+    private lateinit var binding: FragmentFavoriteNoteDetailsBinding
+    private val args by navArgs<FavoriteNoteDetailsFragmentArgs>()
     private lateinit var mViewmodel: NoteViewModel
 
     private var isNoteFavorite: Boolean = false
@@ -32,7 +29,7 @@ class PrivateNoteDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentPrivateNoteDetailsBinding.inflate(inflater, container, false)
+        binding = FragmentFavoriteNoteDetailsBinding.inflate(inflater, container, false)
 
         setHasOptionsMenu(true)
         return binding.root
@@ -43,16 +40,16 @@ class PrivateNoteDetailsFragment : Fragment() {
 
         mViewmodel = ViewModelProvider(this).get(NoteViewModel::class.java)
 
-        binding.noteTitlePrivateNoteDetailsScreen.setText(args.privateNoteDetails.noteTitle)
-        binding.noteBodyPrivateNoteDetailsScreen.setText(args.privateNoteDetails.noteBody)
-        isNoteFavorite = args.privateNoteDetails.favoriteStatus
+        binding.noteTitleFavoriteNoteDetailsScreen.setText(args.favoriteNoteDetails.noteTitle)
+        binding.noteBodyFavoriteNoteDetailsScreen.setText(args.favoriteNoteDetails.noteBody)
+        isNoteFavorite = args.favoriteNoteDetails.favoriteStatus
 
-        binding.btnCancelPrivateNoteDetailsScreen.setOnClickListener {
+        binding.btnCancelFavoriteNoteDetailsScreen.setOnClickListener {
             hideKeyboard()
             navigateToListFragment()
         }
 
-        binding.btnSaveNotePrivateNoteDetailsScreen.setOnClickListener {
+        binding.btnSaveNoteFavoriteNoteDetailsScreen.setOnClickListener {
 //            updateNoteInDatabase(isNoteFavorite)
             hideKeyboard()
             navigateToListFragment()
@@ -63,21 +60,23 @@ class PrivateNoteDetailsFragment : Fragment() {
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.private_note_details_menu, menu)
+        inflater.inflate(R.menu.favorite_note_details_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menu_remove_from_private) {
-            removeNoteFromPrivate()
+        if (item.itemId == R.id.removeFromFavorites) {
+            isNoteFavorite = false
+            hideKeyboard()
+            removeFavoriteNote(isNoteFavorite)
             navigateToListFragment()
-            Snackbar.make(binding.root, "Note removed from private", Snackbar.LENGTH_SHORT).show()
-        } else if (item.itemId == R.id.menu_delete_private_note){
+            Snackbar.make(binding.root, "Note removed from favorites", Snackbar.LENGTH_SHORT).show()
+        } else if (item.itemId == R.id.deleteFavoriteNote){
+            hideKeyboard()
             deleteNote()
             navigateToListFragment()
-            Snackbar.make(binding.root, "Note added to trash", Snackbar.LENGTH_SHORT).show()
-
+            Snackbar.make(binding.root, "Note sent to trash", Snackbar.LENGTH_SHORT).show()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -90,30 +89,26 @@ class PrivateNoteDetailsFragment : Fragment() {
 //    }
 
 
-    private fun removeNoteFromPrivate() {
-        val noteTitle = binding.noteTitlePrivateNoteDetailsScreen.text.toString()
-        val noteBody = binding.noteBodyPrivateNoteDetailsScreen.text.toString()
+    private fun removeFavoriteNote(favoriteStatus: Boolean) {
+        val noteTitle = binding.noteTitleFavoriteNoteDetailsScreen.text.toString()
+        val noteBody = binding.noteBodyFavoriteNoteDetailsScreen.text.toString()
 
-        val noteToRemoveFromPrivateNotes = PrivateNote(args.privateNoteDetails.id, noteTitle, noteBody)
-        val noteToAddToNotes = Note(0, noteTitle, noteBody)
-
-        mViewmodel.addNote(noteToAddToNotes)
-        mViewmodel.deletePrivateNote(noteToRemoveFromPrivateNotes)
+        val note = Note(args.favoriteNoteDetails.id, noteTitle, noteBody, favoriteStatus)
+        mViewmodel.updateNote(note)
     }
 
     private fun deleteNote() {
-        val title = binding.noteTitlePrivateNoteDetailsScreen.text.toString()
-        val body = binding.noteBodyPrivateNoteDetailsScreen.text.toString()
+        val title = binding.noteTitleFavoriteNoteDetailsScreen.text.toString()
+        val body = binding.noteBodyFavoriteNoteDetailsScreen.text.toString()
 
-        val noteToDeleteFromNoteTable = PrivateNote(args.privateNoteDetails.id, title, body)
+        val noteToDeleteFromNoteTable = Note(args.favoriteNoteDetails.id, title, body)
         val noteToAddToDeletedTable = DeletedNote(0, title, body)
 
         mViewmodel.addDeletedNote(noteToAddToDeletedTable)
-        mViewmodel.deletePrivateNote(noteToDeleteFromNoteTable)
+        mViewmodel.deleteNote(noteToDeleteFromNoteTable)
     }
 
     private fun navigateToListFragment() {
         Navigation.findNavController(binding.root).navigate(R.id.action_privateNoteDetailsFragment_to_privateNotesFragment)
     }
-
 }

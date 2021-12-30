@@ -60,10 +60,23 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
         return  repository.searchDatabase(searchQuery)
     }
 
+
     //methods for deleted notes
     fun addDeletedNote(note: DeletedNote) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.addDeletedNote(note)
+        }
+    }
+
+    fun deleteNotePermanently(note: DeletedNote) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteNotePermanently(note)
+        }
+    }
+
+    fun deleteAllDeletedNotes() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteAllDeletedNotes()
         }
     }
 
@@ -78,6 +91,12 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
     fun deletePrivateNote(note: PrivateNote) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.deletePrivateNote(note)
+        }
+    }
+
+    fun deleteAllPrivateNotes() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteAllPrivateNotes()
         }
     }
 

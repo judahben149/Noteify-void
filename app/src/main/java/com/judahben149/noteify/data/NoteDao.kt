@@ -38,8 +38,12 @@ interface NoteDao {
     @Query("SELECT * FROM deleted_note ORDER BY id ASC")
     fun readAllDeletedNotes(): LiveData<List<DeletedNote>>
 
+    @Delete
+    suspend fun deleteNotePermanently(note: DeletedNote)
+
     @Query("DELETE FROM deleted_note")
     suspend fun deleteAllDeletedNotes()
+
 
     //methods for private notes
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -53,5 +57,7 @@ interface NoteDao {
 
     @Query("DELETE FROM private_note")
     suspend fun deleteAllPrivateNotes()
+
+
 
 }
