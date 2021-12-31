@@ -9,7 +9,7 @@
             android:title="@string/all_notes"
             android:icon="@drawable/ic_note_pad" />
 
-        <item android:id="@+id/favoritesFragment"
+        <item android:id="@+id/favoriteNotesListFragment"
             android:title="@string/favorites"
             android:icon="@drawable/ic_favorites" />
 

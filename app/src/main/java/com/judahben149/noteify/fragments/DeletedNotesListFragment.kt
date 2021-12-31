@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.judahben149.noteify.R
 import com.judahben149.noteify.adapters.DeletedNotesListAdapter
 import com.judahben149.noteify.databinding.FragmentAddPrivateNoteBinding
@@ -28,6 +29,13 @@ class DeletedNotesListFragment : Fragment() {
     ): View? {
         _binding = FragmentDeletedNotesListBinding.inflate(inflater, container, false)
 
+        return binding.root
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         rvList = binding.rvDeletedNotesList
         rvList.adapter = adapter
 
@@ -35,13 +43,6 @@ class DeletedNotesListFragment : Fragment() {
         setUpViewModel()
         setUpObservers()
         setHasOptionsMenu(true)
-
-        return binding.root
-    }
-
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.deleted_notes_menu, menu)
     }
 
     override fun onDestroyView() {
@@ -49,6 +50,22 @@ class DeletedNotesListFragment : Fragment() {
         super.onDestroyView()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.deleted_notes_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_restoreAllNotes -> {
+                Snackbar.make(binding.root, "Restoring all notes", Snackbar.LENGTH_SHORT).show()
+            }
+            R.id.menu_deleteAllNotes -> {
+                mViewModel.deleteAllDeletedNotes()
+                Snackbar.make(binding.root, "Trash has been emptied", Snackbar.LENGTH_SHORT).show()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     private fun setupRecyclerViewLayout() {
         val layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false).apply {

@@ -2,33 +2,29 @@ package com.judahben149.noteify.adapters
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.Navigation
 import androidx.recyclerview.selection.ItemDetailsLookup
 import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
 import com.judahben149.noteify.databinding.FragmentNoteItemBinding
 import com.judahben149.noteify.fragments.NoteListFragmentDirections
 import com.judahben149.noteify.model.Note
 import kotlinx.android.synthetic.main.fragment_note_item.view.*
 
-class NoteListRecyclerViewAdapter(): RecyclerView.Adapter<NoteListRecyclerViewAdapter.NoteListRecyclerViewViewHolder>() {
+class NoteListAdapter(): RecyclerView.Adapter<NoteListAdapter.NoteListRecyclerViewViewHolder>() {
 
     var noteList = emptyList<Note>()
-    val isSelectMode = false
-    val selectedItems = arrayListOf<Note>()
-    private var tracker: SelectionTracker<Long>? = null
+//    val isSelectMode = false
+//    val selectedItems = arrayListOf<Note>()
+//    private var tracker: SelectionTracker<Long>? = null
 
 
-    init {
-        setHasStableIds(true)
-    }
-    override fun getItemId(position: Int): Long = position.toLong()
+//    init {
+//        setHasStableIds(true)
+//    }
+//    override fun getItemId(position: Int): Long = position.toLong()
 
 
     inner class NoteListRecyclerViewViewHolder(private val binding: FragmentNoteItemBinding): RecyclerView.ViewHolder(binding.root) {
@@ -44,13 +40,13 @@ class NoteListRecyclerViewAdapter(): RecyclerView.Adapter<NoteListRecyclerViewAd
             }
         }
 
-        fun getItemDetails(): ItemDetailsLookup.ItemDetails<Long> =
-            object: ItemDetailsLookup.ItemDetails<Long>() {
-                override fun getPosition(): Int = bindingAdapterPosition
-
-                override fun getSelectionKey(): Long? = itemId
-
-            }
+//        fun getItemDetails(): ItemDetailsLookup.ItemDetails<Long> =
+//            object: ItemDetailsLookup.ItemDetails<Long>() {
+//                override fun getPosition(): Int = bindingAdapterPosition
+//
+//                override fun getSelectionKey(): Long? = itemId
+//
+//            }
     }
 
 
@@ -63,16 +59,16 @@ class NoteListRecyclerViewAdapter(): RecyclerView.Adapter<NoteListRecyclerViewAd
     override fun onBindViewHolder(holder: NoteListRecyclerViewViewHolder, position: Int) {
         holder.bindItem(position)
 
-        val noteItem = holder.itemView.noteItem
+//        val noteItem = holder.itemView.noteItem
 
         //this changes the color of the note when selected; for visual feedback
-        if (tracker!!.isSelected(position.toLong())) {
-            noteItem.background = ColorDrawable(
-                Color.parseColor("#B2BEB5")
-            )
-        } else {
-            noteItem.background = ColorDrawable(Color.WHITE)
-        }
+//        if (tracker!!.isSelected(position.toLong())) {
+//            noteItem.background = ColorDrawable(
+//                Color.parseColor("#B2BEB5")
+//            )
+//        } else {
+//            noteItem.background = ColorDrawable(Color.WHITE)
+//        }
     }
 
     override fun getItemCount() = noteList.size
@@ -84,11 +80,13 @@ class NoteListRecyclerViewAdapter(): RecyclerView.Adapter<NoteListRecyclerViewAd
     }
 
 
-    fun passItemPositionDuringSwipe(position: Int): Note {
-        return noteList[position]
-    }
 
-    fun setTracker(tracker: SelectionTracker<Long>?) {
-        this.tracker = tracker
-    }
+
+//    fun passItemPositionDuringSwipe(position: Int): Note {
+//        return noteList[position]
+//    }
+//
+//    fun setTracker(tracker: SelectionTracker<Long>?) {
+//        this.tracker = tracker
+//    }
 }

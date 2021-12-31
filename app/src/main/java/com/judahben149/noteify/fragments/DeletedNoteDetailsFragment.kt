@@ -29,6 +29,7 @@ class DeletedNoteDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentDeletedNoteDetailsBinding.inflate(inflater, container, false)
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -37,19 +38,6 @@ class DeletedNoteDetailsFragment : Fragment() {
 
         binding.noteTitleDeletedNoteDetailsScreen.setText(args.deletedNoteDetails.noteTitle)
         binding.noteBodyDeletedNoteDetailsScreen.setText(args.deletedNoteDetails.noteBody)
-
-        binding.btnCancelDeletedNoteDetailsScreen.setOnClickListener {
-            hideKeyboard()
-            Navigation.findNavController(binding.root)
-                .navigate(R.id.action_deletedNoteDetailsFragment_to_deletedNotesListFragment)
-        }
-
-        binding.btnSaveNoteDeletedNoteDetailsScreen.setOnClickListener {
-//            updateNoteInDatabase(isNoteFavorite)
-            hideKeyboard()
-            Navigation.findNavController(binding.root)
-                .navigate(R.id.action_deletedNoteDetailsFragment_to_deletedNotesListFragment)
-        }
 
         super.onViewCreated(view, savedInstanceState)
     }
