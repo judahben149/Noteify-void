@@ -11,6 +11,8 @@ import com.judahben149.noteify.fragments.DeletedNotesListFragmentDirections
 import com.judahben149.noteify.fragments.NoteListFragmentDirections
 import com.judahben149.noteify.model.DeletedNote
 import com.judahben149.noteify.model.Note
+import org.ocpsoft.prettytime.PrettyTime
+import java.util.*
 
 class DeletedNotesListAdapter() : RecyclerView.Adapter<DeletedNotesListAdapter.DeletedNotesListViewHolder>() {
 
@@ -20,9 +22,11 @@ class DeletedNotesListAdapter() : RecyclerView.Adapter<DeletedNotesListAdapter.D
 
         fun bindItem(position: Int) {
             val currentNote = deletedNotes[position]
+            val prettyTime: String = PrettyTime().format(Date(currentNote.dateDeleted))
 
             binding.tvNoteTitle.text = currentNote.noteTitle
             binding.tvNoteDescription.text = currentNote.noteBody
+            binding.tvNoteDate.text = "Deleted: " + prettyTime
 
             binding.noteItem.setOnClickListener {
                 val action = DeletedNotesListFragmentDirections.actionDeletedNotesListFragmentToDeletedNoteDetailsFragment(currentNote)

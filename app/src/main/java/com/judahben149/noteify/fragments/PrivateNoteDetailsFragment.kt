@@ -103,7 +103,7 @@ class PrivateNoteDetailsFragment : Fragment() {
         val noteBody = binding.noteBodyPrivateNoteDetailsScreen.text.toString()
 
         val noteToRemoveFromPrivateNotes = PrivateNote(args.privateNoteDetails.id, noteTitle, noteBody)
-        val noteToAddToNotes = Note(0, noteTitle, noteBody)
+        val noteToAddToNotes = Note(0, noteTitle, noteBody, timeCreated = 0, timeUpdated = 0)
 
         mViewmodel.addNote(noteToAddToNotes)
         mViewmodel.deletePrivateNote(noteToRemoveFromPrivateNotes)
@@ -114,7 +114,7 @@ class PrivateNoteDetailsFragment : Fragment() {
         val body = binding.noteBodyPrivateNoteDetailsScreen.text.toString()
 
         val noteToDeleteFromNoteTable = PrivateNote(args.privateNoteDetails.id, title, body)
-        val noteToAddToDeletedTable = DeletedNote(0, title, body)
+        val noteToAddToDeletedTable = DeletedNote(0, title, body, dateDeleted = 0)
 
         mViewmodel.addDeletedNote(noteToAddToDeletedTable)
         mViewmodel.deletePrivateNote(noteToDeleteFromNoteTable)

@@ -21,16 +21,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/date_created_NoteDetailsScreen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:backgroundTint="@android:color/transparent"
+        android:text="date"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/note_title_NoteDetailsScreen" />
+
 
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/noteDetails_Divider"
         android:layout_width="match_parent"
         android:layout_height="0.9dp"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginHorizontal="10dp"
         app:dividerColor="#BDBDBD"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/note_title_NoteDetailsScreen"
+        app:layout_constraintTop_toBottomOf="@id/date_created_NoteDetailsScreen"
 
         />
 
@@ -64,6 +77,7 @@
     <Button
         android:id="@+id/btn_saveNote_NoteDetailsScreen"
         style="@style/MyButtonStyle_Primary"
+        android:textSize="14dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -85,16 +99,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/btn_addToFavorites_NoteDetailsScreen"
-        style="@style/MyButtonStyle_Secondary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="Favorite"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btn_saveNote_NoteDetailsScreen"
-        app:layout_constraintStart_toEndOf="@id/btn_cancel_NoteDetailsScreen" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

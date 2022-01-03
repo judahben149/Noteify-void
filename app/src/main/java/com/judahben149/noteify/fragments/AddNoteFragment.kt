@@ -44,12 +44,6 @@ class AddNoteFragment : Fragment() {
             insertNoteToDatabase()
         }
 
-        binding.btnAddToFavoritesAddNoteScreen.setOnClickListener {
-            addNoteToFavoritesDatabase()
-            hideKeyboard()
-            Snackbar.make(binding.root, "Note added to favorites", Snackbar.LENGTH_SHORT).show()
-        }
-
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -63,8 +57,9 @@ class AddNoteFragment : Fragment() {
     private fun insertNoteToDatabase() {
         val noteTitle = binding.etNoteTitleAddNoteScreen.text.toString()
         val noteBody = binding.etNoteBodyAddNoteScreen.text.toString()
+        val timeCreated = System.currentTimeMillis()
 
-        val note = Note(0, noteTitle, noteBody)
+        val note = Note(0, noteTitle, noteBody, false, timeCreated, timeCreated)
         mViewmodel.addNote(note)
 
         Navigation.findNavController(binding.root).navigate(R.id.action_addNoteFragment_to_noteListFragment)

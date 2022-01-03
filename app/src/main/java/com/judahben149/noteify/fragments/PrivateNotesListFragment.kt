@@ -43,14 +43,17 @@ class PrivateNotesListFragment : Fragment() {
     }
 
 
-    override fun onDestroyView() {
-        _binding = null
-        super.onDestroyView()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.fabAddPrivateNoteButton.setOnClickListener {
+            Navigation.findNavController(binding.root)
+                .navigate(R.id.action_privateNotesFragment_to_addPrivateNoteFragment)
+        }
+        super.onViewCreated(view, savedInstanceState)
     }
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.deleted_notes_menu, menu)
+        inflater.inflate(R.menu.private_notes_menu, menu)
     }
 
 
@@ -79,13 +82,9 @@ class PrivateNotesListFragment : Fragment() {
         })
     }
 
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.fabAddPrivateNoteButton.setOnClickListener {
-            Navigation.findNavController(binding.root)
-                .navigate(R.id.action_privateNotesFragment_to_addPrivateNoteFragment)
-        }
-        super.onViewCreated(view, savedInstanceState)
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
     }
 
 }

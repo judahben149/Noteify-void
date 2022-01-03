@@ -87,8 +87,8 @@ class DeletedNoteDetailsFragment : Fragment() {
         val title = binding.noteTitleDeletedNoteDetailsScreen.text.toString()
         val body = binding.noteBodyDeletedNoteDetailsScreen.text.toString()
 
-        val noteToDeleteFromDeletedNoteTable = DeletedNote(args.deletedNoteDetails.id, title, body)
-        val noteToRestoreToNoteTable = Note(0, title, body)
+        val noteToDeleteFromDeletedNoteTable = DeletedNote(args.deletedNoteDetails.id, title, body, timeCreated = 0, timeUpdated = 0 , dateDeleted = 0)
+        val noteToRestoreToNoteTable = Note(0, title, body, timeCreated = 0, timeUpdated = 0)
 
         Snackbar.make(binding.root, "Note restored", Snackbar.LENGTH_SHORT).show()
 

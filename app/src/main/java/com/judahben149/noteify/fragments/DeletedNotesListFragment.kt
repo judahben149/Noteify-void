@@ -1,5 +1,6 @@
 package com.judahben149.noteify.fragments
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -11,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.judahben149.noteify.R
 import com.judahben149.noteify.adapters.DeletedNotesListAdapter
-import com.judahben149.noteify.databinding.FragmentAddPrivateNoteBinding
 import com.judahben149.noteify.databinding.FragmentDeletedNotesListBinding
 import com.judahben149.noteify.viewmodel.NoteViewModel
 
@@ -60,8 +60,7 @@ class DeletedNotesListFragment : Fragment() {
                 Snackbar.make(binding.root, "Restoring all notes", Snackbar.LENGTH_SHORT).show()
             }
             R.id.menu_deleteAllNotes -> {
-                mViewModel.deleteAllDeletedNotes()
-                Snackbar.make(binding.root, "Trash has been emptied", Snackbar.LENGTH_SHORT).show()
+                deleteNotesForever()
             }
         }
         return super.onOptionsItemSelected(item)
@@ -90,6 +89,27 @@ class DeletedNotesListFragment : Fragment() {
         mViewModel.readAllDeletedNotes.observe(viewLifecycleOwner, Observer { note ->
             adapter.setData(note)
         })
+    }
+
+    private fun deleteNotesForever() {
+        val builder = AlertDialog.Builder(requireContext())
+
+        builder.apply {
+
+            setPositiveButton("Delete forever") { _, _ ->
+                mViewModel.deleteTrashedNotesForever()
+                Snackbar.make(binding.root, "Trash has been emptied", Snackbar.LENGTH_LONG)
+                    .show()
+            }
+            setNegativeButton("Cancel") { _, _ ->
+            }
+
+            setTitle("Delete notes permanently")
+            setMessage("Are you sure you want to empty the trash? Notes will be deleted forever.")
+            setIcon(R.drawable.ic_delete)
+            create()
+            show()
+        }
     }
 
 }

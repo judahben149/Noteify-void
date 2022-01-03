@@ -83,4 +83,7 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview-selection:1.1.0"
 
     implementation 'com.google.android.material:material:1.6.0-alpha01'
+
+    //Pretty time library
+    implementation "org.ocpsoft.prettytime:prettytime:5.0.2.Final"
 }
