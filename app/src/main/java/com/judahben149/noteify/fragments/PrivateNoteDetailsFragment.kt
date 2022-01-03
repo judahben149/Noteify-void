@@ -11,6 +11,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.judahben149.noteify.R
+import com.judahben149.noteify.databinding.FragmentAddPrivateNoteBinding
 import com.judahben149.noteify.databinding.FragmentNoteDetailsBinding
 import com.judahben149.noteify.databinding.FragmentPrivateNoteDetailsBinding
 import com.judahben149.noteify.hideKeyboard
@@ -21,7 +22,8 @@ import com.judahben149.noteify.viewmodel.NoteViewModel
 
 class PrivateNoteDetailsFragment : Fragment() {
 
-    private lateinit var binding: FragmentPrivateNoteDetailsBinding
+    private var _binding: FragmentPrivateNoteDetailsBinding? = null
+    private val binding get() = _binding!!
     private val args by navArgs<PrivateNoteDetailsFragmentArgs>()
     private lateinit var mViewmodel: NoteViewModel
 
@@ -32,7 +34,7 @@ class PrivateNoteDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentPrivateNoteDetailsBinding.inflate(inflater, container, false)
+        _binding = FragmentPrivateNoteDetailsBinding.inflate(inflater, container, false)
 
         setHasOptionsMenu(true)
         return binding.root
@@ -83,6 +85,12 @@ class PrivateNoteDetailsFragment : Fragment() {
     }
 
 
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
+
+
 //    override fun onPause() {
 //        //this saves the note once the fragment loses focus or is going to be destroyed. Acts for Auto-save
 //        updateNoteInDatabase(isNoteFavorite)
@@ -95,7 +103,7 @@ class PrivateNoteDetailsFragment : Fragment() {
         val noteBody = binding.noteBodyPrivateNoteDetailsScreen.text.toString()
 
         val noteToRemoveFromPrivateNotes = PrivateNote(args.privateNoteDetails.id, noteTitle, noteBody)
-        val noteToAddToNotes = Note(0, noteTitle, noteBody)
+        val noteToAddToNotes = Note(0, noteTitle, noteBody, timeCreated = 0, timeUpdated = 0)
 
         mViewmodel.addNote(noteToAddToNotes)
         mViewmodel.deletePrivateNote(noteToRemoveFromPrivateNotes)
@@ -106,7 +114,7 @@ class PrivateNoteDetailsFragment : Fragment() {
         val body = binding.noteBodyPrivateNoteDetailsScreen.text.toString()
 
         val noteToDeleteFromNoteTable = PrivateNote(args.privateNoteDetails.id, title, body)
-        val noteToAddToDeletedTable = DeletedNote(0, title, body)
+        val noteToAddToDeletedTable = DeletedNote(0, title, body, dateDeleted = 0)
 
         mViewmodel.addDeletedNote(noteToAddToDeletedTable)
         mViewmodel.deletePrivateNote(noteToDeleteFromNoteTable)

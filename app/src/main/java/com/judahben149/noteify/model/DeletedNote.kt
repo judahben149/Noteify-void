@@ -16,9 +16,11 @@ data class DeletedNote(
     var noteTitle: String,
     @ColumnInfo(name = "deleted_note_body")
     var noteBody: String,
-    @ColumnInfo(name = "date_deleted")
-    var dateDeleted: String = "",
-    @ColumnInfo(name = "date_created")
-    var dateCreated: String = ""
+    @ColumnInfo(name = "time_created")
+    var timeCreated: Long = 0,
+    @ColumnInfo(name = "time_updated")
+    var timeUpdated: Long = 0,
+    @ColumnInfo(name = "time_deleted")
+    var dateDeleted: Long,
 ) : Parcelable
 

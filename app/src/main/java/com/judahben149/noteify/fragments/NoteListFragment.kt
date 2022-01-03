@@ -2,39 +2,30 @@ package com.judahben149.noteify.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
-import androidx.recyclerview.selection.SelectionPredicates
-import androidx.recyclerview.selection.SelectionTracker
-import androidx.recyclerview.selection.StableIdKeyProvider
-import androidx.recyclerview.selection.StorageStrategy
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
-import com.judahben149.noteify.NoteLookup
-import com.judahben149.noteify.adapters.NoteListRecyclerViewAdapter
+import com.judahben149.noteify.adapters.NoteListAdapter
 import com.judahben149.noteify.R
-import com.judahben149.noteify.adapters.NoteListAdapterSwipeGestures
 import com.judahben149.noteify.databinding.FragmentNoteListBinding
 import com.judahben149.noteify.model.Note
 import com.judahben149.noteify.viewmodel.NoteViewModel
 
 class NoteListFragment : Fragment() { //, androidx.appcompat.widget.SearchView.OnQueryTextListener {
 
-    private lateinit var binding: FragmentNoteListBinding
+    private var _binding: FragmentNoteListBinding? = null
+    private val binding get() = _binding!!
     private lateinit var mViewModel: NoteViewModel
-    val adapter = NoteListRecyclerViewAdapter()
-    private var tracker: SelectionTracker<Long>? = null
+    val adapter = NoteListAdapter()
 
     private val noteObject = emptyList<Note>()
-//    val numberOfNotes = noteObject.size
 
 
     override fun onCreateView(
@@ -42,7 +33,7 @@ class NoteListFragment : Fragment() { //, androidx.appcompat.widget.SearchView.O
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentNoteListBinding.inflate(inflater, container, false)
+        _binding = FragmentNoteListBinding.inflate(inflater, container, false)
 
         setHasOptionsMenu(true)
         return binding.root
@@ -55,20 +46,6 @@ class NoteListFragment : Fragment() { //, androidx.appcompat.widget.SearchView.O
         rvList.adapter = adapter
 
 
-        //tracker for the recycler view multi-select functionality
-        tracker = SelectionTracker.Builder<Long>(
-            "selection-1",
-            rvList,
-            StableIdKeyProvider(rvList),
-            NoteLookup(rvList),
-            StorageStrategy.createLongStorage()
-        ).withSelectionPredicate(
-            SelectionPredicates.createSelectAnything()
-        ).build()
-
-        //then associate the tracker with your recycler view adapter
-        adapter.setTracker(tracker)
-
         val layoutManager = LinearLayoutManager(
             requireContext(),
             RecyclerView.VERTICAL,
@@ -79,7 +56,6 @@ class NoteListFragment : Fragment() { //, androidx.appcompat.widget.SearchView.O
 
         setUpViewModelAndObserver()
         recyclerViewDivider(rvList, layoutManager)
-        setUpSwipeGestures(rvList)
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -105,6 +81,11 @@ class NoteListFragment : Fragment() { //, androidx.appcompat.widget.SearchView.O
         super.onViewCreated(view, savedInstanceState)
     }
 
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
+
 
 
     private fun setUpViewModelAndObserver() {
@@ -124,37 +105,6 @@ class NoteListFragment : Fragment() { //, androidx.appcompat.widget.SearchView.O
             }
     }
 
-
-    private fun setUpSwipeGestures(rvList: RecyclerView) {
-        //this code implements the swipe action for deleting a note
-        val swipeGestures = object : NoteListAdapterSwipeGestures(requireContext()) {
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-
-                when (direction) {
-
-                    ItemTouchHelper.LEFT -> {
-                        //This is to get the object of the note item which the deleteNote method from the view model needs
-                        val deletedItemPosition =
-                            adapter.passItemPositionDuringSwipe(viewHolder.absoluteAdapterPosition)
-                        mViewModel.deleteNote(deletedItemPosition)
-                        Snackbar.make(binding.root, "Note deleted", Snackbar.LENGTH_LONG).apply {
-                            setAction(R.string.undo) { _ ->
-                                undoDelete(deletedItemPosition)
-                            }
-                            show()
-                        }
-                    }
-//                    ItemTouchHelper.RIGHT -> {
-//
-//                    }
-
-                }
-            }
-        }
-
-        val touchHelper = ItemTouchHelper(swipeGestures)
-        touchHelper.attachToRecyclerView(rvList)
-    }
 
 
     //function to search for a particular string either in the title or body of the note

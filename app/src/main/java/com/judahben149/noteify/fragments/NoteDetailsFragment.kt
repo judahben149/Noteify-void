@@ -14,15 +14,19 @@ import com.judahben149.noteify.hideKeyboard
 import com.judahben149.noteify.model.DeletedNote
 import com.judahben149.noteify.model.Note
 import com.judahben149.noteify.viewmodel.NoteViewModel
+import org.ocpsoft.prettytime.PrettyTime
+import java.util.*
 
 class NoteDetailsFragment: Fragment() {
 
     private var _binding: FragmentNoteDetailsBinding? = null
     private val binding get() = _binding!!
+
     private val args by navArgs<NoteDetailsFragmentArgs>()
     private lateinit var mViewmodel: NoteViewModel
 
     private var isNoteFavorite: Boolean = false
+    var timeCreated: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,9 +51,12 @@ class NoteDetailsFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         mViewmodel = ViewModelProvider(this).get(NoteViewModel::class.java)
+        timeCreated = PrettyTime().format(Date(args.currentNote.timeCreated))
 
         binding.noteTitleNoteDetailsScreen.setText(args.currentNote.noteTitle)
         binding.noteBodyNoteDetailsScreen.setText(args.currentNote.noteBody)
+        binding.dateCreatedNoteDetailsScreen.text = "Created: " + timeCreated
+
         isNoteFavorite = args.currentNote.favoriteStatus
 
         binding.btnCancelNoteDetailsScreen.setOnClickListener {
@@ -102,8 +109,9 @@ class NoteDetailsFragment: Fragment() {
     private fun updateNoteInDatabase(favoriteStatus: Boolean) {
         val noteTitle = binding.noteTitleNoteDetailsScreen.text.toString()
         val noteBody = binding.noteBodyNoteDetailsScreen.text.toString()
+        val timeUpdated = System.currentTimeMillis()
 
-        val note = Note(args.currentNote.id, noteTitle, noteBody, favoriteStatus)
+        val note = Note(args.currentNote.id, noteTitle, noteBody, favoriteStatus, timeUpdated = timeUpdated, timeCreated = args.currentNote.timeCreated)
         mViewmodel.updateNote(note)
     }
 
@@ -111,8 +119,8 @@ class NoteDetailsFragment: Fragment() {
         val title = binding.noteTitleNoteDetailsScreen.text.toString()
         val body = binding.noteTitleNoteDetailsScreen.text.toString()
 
-        val noteToDeleteFromNoteTable = Note(args.currentNote.id, title, body)
-        val noteToAddToDeletedTable = DeletedNote(0, title, body)
+        val noteToDeleteFromNoteTable = Note(args.currentNote.id, title, body, false, 0, 0)
+        val noteToAddToDeletedTable = DeletedNote(0, title, body, args.currentNote.timeCreated, args.currentNote.timeUpdated, System.currentTimeMillis())
 
         mViewmodel.addDeletedNote(noteToAddToDeletedTable)
         mViewmodel.deleteNote(noteToDeleteFromNoteTable)

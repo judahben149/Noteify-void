@@ -6,9 +6,7 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.judahben149.noteify.databinding.FragmentNoteItemBinding
-import com.judahben149.noteify.fragments.NoteListFragmentDirections
-import com.judahben149.noteify.fragments.PrivateNotesFragmentDirections
-import com.judahben149.noteify.model.DeletedNote
+import com.judahben149.noteify.fragments.PrivateNotesListFragmentDirections
 import com.judahben149.noteify.model.PrivateNote
 
 class PrivateNotesAdapter() : RecyclerView.Adapter<PrivateNotesAdapter.PrivateNotesViewHolder>() {
@@ -25,7 +23,7 @@ class PrivateNotesAdapter() : RecyclerView.Adapter<PrivateNotesAdapter.PrivateNo
 
             binding.noteItem.setOnClickListener {
                 Snackbar.make(binding.root, "You have clicked me", Snackbar.LENGTH_SHORT).show()
-                val action = PrivateNotesFragmentDirections.actionPrivateNotesFragmentToPrivateNoteDetailsFragment(currentNote)
+                val action = PrivateNotesListFragmentDirections.actionPrivateNotesFragmentToPrivateNoteDetailsFragment(currentNote)
                 Navigation.findNavController(binding.root).navigate(action)
             }
         }

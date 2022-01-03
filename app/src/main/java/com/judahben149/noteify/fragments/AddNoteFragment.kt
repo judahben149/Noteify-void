@@ -10,20 +10,23 @@ import androidx.navigation.Navigation
 import com.google.android.material.snackbar.Snackbar
 import com.judahben149.noteify.R
 import com.judahben149.noteify.databinding.FragmentAddNoteBinding
+import com.judahben149.noteify.databinding.FragmentNoteDetailsBinding
 import com.judahben149.noteify.hideKeyboard
 import com.judahben149.noteify.model.Note
 import com.judahben149.noteify.viewmodel.NoteViewModel
 
 class AddNoteFragment : Fragment() {
 
-    private lateinit var binding: FragmentAddNoteBinding
+
+    private var _binding: FragmentAddNoteBinding? = null
+    private val binding get() = _binding!!
     private lateinit var mViewmodel: NoteViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentAddNoteBinding.inflate(inflater, container, false)
+        _binding = FragmentAddNoteBinding.inflate(inflater, container, false)
         mViewmodel = ViewModelProvider(this).get(NoteViewModel::class.java)
         return binding.root
     }
@@ -41,22 +44,22 @@ class AddNoteFragment : Fragment() {
             insertNoteToDatabase()
         }
 
-        binding.btnAddToFavoritesAddNoteScreen.setOnClickListener {
-            addNoteToFavoritesDatabase()
-            hideKeyboard()
-            Snackbar.make(binding.root, "Note added to favorites", Snackbar.LENGTH_SHORT).show()
-        }
-
         super.onViewCreated(view, savedInstanceState)
     }
 
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
 
 
     private fun insertNoteToDatabase() {
         val noteTitle = binding.etNoteTitleAddNoteScreen.text.toString()
         val noteBody = binding.etNoteBodyAddNoteScreen.text.toString()
+        val timeCreated = System.currentTimeMillis()
 
-        val note = Note(0, noteTitle, noteBody)
+        val note = Note(0, noteTitle, noteBody, false, timeCreated, timeCreated)
         mViewmodel.addNote(note)
 
         Navigation.findNavController(binding.root).navigate(R.id.action_addNoteFragment_to_noteListFragment)

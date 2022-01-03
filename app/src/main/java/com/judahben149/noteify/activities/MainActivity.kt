@@ -22,13 +22,16 @@ import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.judahben149.noteify.R
 import com.judahben149.noteify.databinding.ActivityMainBinding
+import com.judahben149.noteify.databinding.FragmentAddPrivateNoteBinding
 import com.judahben149.noteify.viewmodel.NoteViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_note_list.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private var _binding: ActivityMainBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var navHostFragment: NavHostFragment
     private lateinit var navController: NavController
     private lateinit var mViewModel: NoteViewModel
@@ -40,7 +43,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         //initialize variables here
@@ -59,6 +62,10 @@ class MainActivity : AppCompatActivity() {
         mViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
     }
 
+    override fun onDestroy() {
+        _binding = null
+        super.onDestroy()
+    }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = navHostFragment.navController

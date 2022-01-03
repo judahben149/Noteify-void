@@ -3,4 +3,8 @@
     <attr name="backgroundColor" format="color"/>
     <attr name="textColor" format="color"/>
 <!--    <attr name="backgroundColor" format="color"/>-->
+
+    <attr name="noteTitleColor" format="color" />
+    <attr name="searchView" format="color" />
+
 </resources>

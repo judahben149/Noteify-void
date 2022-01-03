@@ -24,7 +24,7 @@
         android:id="@+id/privateNoteDetails_Divider"
         android:layout_width="match_parent"
         android:layout_height="0.9dp"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginHorizontal="10dp"
         app:dividerColor="#BDBDBD"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -85,15 +85,4 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-<!--    <Button-->
-<!--        android:id="@+id/btn_addToFavorites_addPrivateNoteScreen"-->
-<!--        style="@style/MyButtonStyle_Secondary"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Favorite"-->
-<!--        android:layout_marginBottom="20dp"-->
-<!--        android:visibility="gone"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintStart_toEndOf="@id/btn_cancel_addPrivateNoteScreen"-->
-<!--        app:layout_constraintEnd_toStartOf="@id/btn_saveNote_addPrivateNoteScreen"/>-->
 </androidx.constraintlayout.widget.ConstraintLayout>

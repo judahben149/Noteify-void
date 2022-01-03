@@ -11,6 +11,8 @@ import com.judahben149.noteify.model.PrivateNote
 import com.judahben149.noteify.repository.NoteRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 
 class NoteViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -74,7 +76,7 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun deleteAllDeletedNotes() {
+    fun deleteTrashedNotesForever() {
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteAllDeletedNotes()
         }
@@ -97,6 +99,15 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
     fun deleteAllPrivateNotes() {
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteAllPrivateNotes()
+        }
+    }
+
+
+    companion object {
+
+        fun getDateFormatter(locale: Locale): SimpleDateFormat {
+            val pattern = "EEE d MMM yyyy"
+            return SimpleDateFormat(pattern, locale)
         }
     }
 

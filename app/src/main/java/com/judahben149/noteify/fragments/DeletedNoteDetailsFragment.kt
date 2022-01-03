@@ -8,6 +8,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.judahben149.noteify.R
+import com.judahben149.noteify.databinding.FragmentAddPrivateNoteBinding
 import com.judahben149.noteify.databinding.FragmentDeletedNoteDetailsBinding
 import com.judahben149.noteify.hideKeyboard
 import com.judahben149.noteify.model.DeletedNote
@@ -18,7 +19,8 @@ import com.judahben149.noteify.viewmodel.NoteViewModel
 
 class DeletedNoteDetailsFragment : Fragment() {
 
-    private lateinit var binding: FragmentDeletedNoteDetailsBinding
+    private var _binding: FragmentDeletedNoteDetailsBinding? = null
+    private val binding get() = _binding!!
     private val args by navArgs<DeletedNoteDetailsFragmentArgs>()
     private lateinit var mViewmodel: NoteViewModel
 
@@ -26,7 +28,8 @@ class DeletedNoteDetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentDeletedNoteDetailsBinding.inflate(inflater, container, false)
+        _binding = FragmentDeletedNoteDetailsBinding.inflate(inflater, container, false)
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -35,19 +38,6 @@ class DeletedNoteDetailsFragment : Fragment() {
 
         binding.noteTitleDeletedNoteDetailsScreen.setText(args.deletedNoteDetails.noteTitle)
         binding.noteBodyDeletedNoteDetailsScreen.setText(args.deletedNoteDetails.noteBody)
-
-        binding.btnCancelDeletedNoteDetailsScreen.setOnClickListener {
-            hideKeyboard()
-            Navigation.findNavController(binding.root)
-                .navigate(R.id.action_deletedNoteDetailsFragment_to_deletedNotesListFragment)
-        }
-
-        binding.btnSaveNoteDeletedNoteDetailsScreen.setOnClickListener {
-//            updateNoteInDatabase(isNoteFavorite)
-            hideKeyboard()
-            Navigation.findNavController(binding.root)
-                .navigate(R.id.action_deletedNoteDetailsFragment_to_deletedNotesListFragment)
-        }
 
         super.onViewCreated(view, savedInstanceState)
     }
@@ -72,6 +62,12 @@ class DeletedNoteDetailsFragment : Fragment() {
     }
 
 
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
+
+
 //    override fun onPause() {
 //        //this saves the note once the fragment loses focus or is going to be destroyed. Acts for Auto-save
 //        updateNoteInDatabase(isNoteFavorite)
@@ -91,8 +87,8 @@ class DeletedNoteDetailsFragment : Fragment() {
         val title = binding.noteTitleDeletedNoteDetailsScreen.text.toString()
         val body = binding.noteBodyDeletedNoteDetailsScreen.text.toString()
 
-        val noteToDeleteFromDeletedNoteTable = DeletedNote(args.deletedNoteDetails.id, title, body)
-        val noteToRestoreToNoteTable = Note(0, title, body)
+        val noteToDeleteFromDeletedNoteTable = DeletedNote(args.deletedNoteDetails.id, title, body, timeCreated = 0, timeUpdated = 0 , dateDeleted = 0)
+        val noteToRestoreToNoteTable = Note(0, title, body, timeCreated = 0, timeUpdated = 0)
 
         Snackbar.make(binding.root, "Note restored", Snackbar.LENGTH_SHORT).show()
 

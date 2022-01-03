@@ -10,15 +10,16 @@
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/drawable/ic_pin.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/drawable/ic_search.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/drawable/search_box_drawable.xml" value="0.22083333333333333" />
-        <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/app_bar_main.xml" value="0.2046875" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/custom_action_bar.xml" value="0.2046875" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/fragment_add_note.xml" value="0.2046875" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/fragment_add_private_note.xml" value="0.190625" />
-        <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/fragment_deleted_note_details.xml" value="0.2046875" />
+        <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/fragment_deleted_note_details.xml" value="0.33" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/fragment_deleted_notes.xml" value="0.2046875" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/fragment_deleted_notes_list.xml" value="0.2046875" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/fragment_favorite_note_details.xml" value="0.2046875" />
+        <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/fragment_favorite_notes_list.xml" value="0.2046875" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/fragment_favorites.xml" value="0.2046875" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/fragment_item_list.xml" value="0.2046875" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Noteify/app/src/main/res/layout/fragment_note_details.xml" value="0.25" />
@@ -42,7 +43,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

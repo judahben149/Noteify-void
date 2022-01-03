@@ -7,8 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.judahben149.noteify.databinding.FragmentNoteItemBinding
 import com.judahben149.noteify.fragments.FavoriteNoteDetailsFragmentDirections
-import com.judahben149.noteify.fragments.FavoritesFragmentDirections
-import com.judahben149.noteify.fragments.PrivateNotesFragmentDirections
+import com.judahben149.noteify.fragments.FavoriteNotesListFragmentDirections
 import com.judahben149.noteify.model.Note
 
 class FavoriteNotesAdapter(): RecyclerView.Adapter<FavoriteNotesAdapter.FavoriteNotesViewHolder>() {
@@ -25,7 +24,7 @@ class FavoriteNotesAdapter(): RecyclerView.Adapter<FavoriteNotesAdapter.Favorite
 
             binding.noteItem.setOnClickListener {
 //                Snackbar.make(binding.root, "You have clicked me", Snackbar.LENGTH_SHORT).show()
-                val action = FavoritesFragmentDirections.actionFavoritesFragmentToFavoriteNoteDetailsFragment(currentNote)
+                val action = FavoriteNotesListFragmentDirections.actionFavoritesFragmentToFavoriteNoteDetailsFragment(currentNote)
                 Navigation.findNavController(binding.root).navigate(action)
             }
         }

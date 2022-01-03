@@ -11,13 +11,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.judahben149.noteify.R
 import com.judahben149.noteify.adapters.FavoriteNotesAdapter
-import com.judahben149.noteify.databinding.FragmentFavoritesBinding
+import com.judahben149.noteify.databinding.FragmentAddPrivateNoteBinding
+import com.judahben149.noteify.databinding.FragmentFavoriteNotesListBinding
 import com.judahben149.noteify.viewmodel.NoteViewModel
 
 
-class FavoritesFragment : Fragment() {
+class FavoriteNotesListFragment : Fragment() {
 
-    private lateinit var binding: FragmentFavoritesBinding
+    private var _binding: FragmentFavoriteNotesListBinding? = null
+    private val binding get() = _binding!!
     private val adapter = FavoriteNotesAdapter()
     private lateinit var mViewModel: NoteViewModel
     private lateinit var rvList: RecyclerView
@@ -27,7 +29,14 @@ class FavoritesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentFavoritesBinding.inflate(inflater, container, false)
+        _binding = FragmentFavoriteNotesListBinding.inflate(inflater, container, false)
+
+        return binding.root
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         rvList = binding.rvFavoritesNotesList
         rvList.adapter = adapter
@@ -37,9 +46,13 @@ class FavoritesFragment : Fragment() {
         setUpViewModel()
         setUpObservers()
         setHasOptionsMenu(true)
-
-        return binding.root
     }
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
+
 
     private fun setUpViewModel() {
         mViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)

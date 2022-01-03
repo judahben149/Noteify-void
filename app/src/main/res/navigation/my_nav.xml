@@ -45,17 +45,17 @@
             app:argType="com.judahben149.noteify.model.Note" />
     </fragment>
     <fragment
-        android:id="@+id/favoritesFragment"
-        android:name="com.judahben149.noteify.fragments.FavoritesFragment"
+        android:id="@+id/favoriteNotesListFragment"
+        android:name="com.judahben149.noteify.fragments.FavoriteNotesListFragment"
         android:label="Favorites"
-        tools:layout="@layout/fragment_favorites">
+        tools:layout="@layout/fragment_favorite_notes_list">
         <action
             android:id="@+id/action_favoritesFragment_to_favoriteNoteDetailsFragment"
             app:destination="@id/favoriteNoteDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/privateNotesFragment"
-        android:name="com.judahben149.noteify.fragments.PrivateNotesFragment"
+        android:name="com.judahben149.noteify.fragments.PrivateNotesListFragment"
         android:label="Private Notes"
         tools:layout="@layout/fragment_private_notes">
         <action
@@ -118,7 +118,7 @@
         tools:layout="@layout/fragment_favorite_note_details">
         <action
             android:id="@+id/action_favoriteNoteDetailsFragment_to_favoritesFragment2"
-            app:destination="@id/favoritesFragment" />
+            app:destination="@id/favoriteNotesListFragment" />
         <argument
             android:name="FavoriteNoteDetails"
             app:argType="com.judahben149.noteify.model.Note" />

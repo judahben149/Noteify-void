@@ -9,6 +9,7 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.judahben149.noteify.R
 import com.judahben149.noteify.databinding.FragmentFavoriteNoteDetailsBinding
+import com.judahben149.noteify.databinding.FragmentNoteDetailsBinding
 import com.judahben149.noteify.databinding.FragmentPrivateNoteDetailsBinding
 import com.judahben149.noteify.hideKeyboard
 import com.judahben149.noteify.model.DeletedNote
@@ -18,7 +19,8 @@ import com.judahben149.noteify.viewmodel.NoteViewModel
 
 class FavoriteNoteDetailsFragment : Fragment() {
 
-    private lateinit var binding: FragmentFavoriteNoteDetailsBinding
+    private var _binding: FragmentFavoriteNoteDetailsBinding? = null
+    private val binding get() = _binding!!
     private val args by navArgs<FavoriteNoteDetailsFragmentArgs>()
     private lateinit var mViewmodel: NoteViewModel
 
@@ -29,7 +31,7 @@ class FavoriteNoteDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentFavoriteNoteDetailsBinding.inflate(inflater, container, false)
+        _binding = FragmentFavoriteNoteDetailsBinding.inflate(inflater, container, false)
 
         setHasOptionsMenu(true)
         return binding.root
@@ -82,6 +84,12 @@ class FavoriteNoteDetailsFragment : Fragment() {
     }
 
 
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
+
+
 //    override fun onPause() {
 //        //this saves the note once the fragment loses focus or is going to be destroyed. Acts for Auto-save
 //        updateNoteInDatabase(isNoteFavorite)
@@ -93,7 +101,7 @@ class FavoriteNoteDetailsFragment : Fragment() {
         val noteTitle = binding.noteTitleFavoriteNoteDetailsScreen.text.toString()
         val noteBody = binding.noteBodyFavoriteNoteDetailsScreen.text.toString()
 
-        val note = Note(args.favoriteNoteDetails.id, noteTitle, noteBody, favoriteStatus)
+        val note = Note(args.favoriteNoteDetails.id, noteTitle, noteBody, favoriteStatus, timeCreated = 0, timeUpdated = 0)
         mViewmodel.updateNote(note)
     }
 
@@ -101,8 +109,8 @@ class FavoriteNoteDetailsFragment : Fragment() {
         val title = binding.noteTitleFavoriteNoteDetailsScreen.text.toString()
         val body = binding.noteBodyFavoriteNoteDetailsScreen.text.toString()
 
-        val noteToDeleteFromNoteTable = Note(args.favoriteNoteDetails.id, title, body)
-        val noteToAddToDeletedTable = DeletedNote(0, title, body)
+        val noteToDeleteFromNoteTable = Note(args.favoriteNoteDetails.id, title, body, timeCreated = 0, timeUpdated = 0)
+        val noteToAddToDeletedTable = DeletedNote(0, title, body, timeCreated = 0, timeUpdated = 0, dateDeleted = 0)
 
         mViewmodel.addDeletedNote(noteToAddToDeletedTable)
         mViewmodel.deleteNote(noteToDeleteFromNoteTable)
