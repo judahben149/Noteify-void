@@ -28,7 +28,6 @@ class DeletedNotesListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentDeletedNotesListBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
@@ -97,7 +96,7 @@ class DeletedNotesListFragment : Fragment() {
         builder.apply {
 
             setPositiveButton("Delete forever") { _, _ ->
-                mViewModel.deleteTrashedNotesForever()
+                mViewModel.deleteAllDeletedNotes()
                 Snackbar.make(binding.root, "Trash has been emptied", Snackbar.LENGTH_LONG)
                     .show()
             }

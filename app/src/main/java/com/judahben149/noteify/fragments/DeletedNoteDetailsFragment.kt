@@ -8,12 +8,8 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.judahben149.noteify.R
-import com.judahben149.noteify.databinding.FragmentAddPrivateNoteBinding
 import com.judahben149.noteify.databinding.FragmentDeletedNoteDetailsBinding
-import com.judahben149.noteify.hideKeyboard
-import com.judahben149.noteify.model.DeletedNote
 import com.judahben149.noteify.model.Note
-import com.judahben149.noteify.model.PrivateNote
 import com.judahben149.noteify.viewmodel.NoteViewModel
 
 
@@ -54,9 +50,8 @@ class DeletedNoteDetailsFragment : Fragment() {
             restoreNote()
             Snackbar.make(binding.root, "Note restored", Snackbar.LENGTH_SHORT).show()
         } else if (item.itemId == R.id.menu_delete_note_permanently) {
-//            deleteNote()
+            deleteNotePermanently()
             Snackbar.make(binding.root, "Note deleted permanently", Snackbar.LENGTH_SHORT).show()
-
         }
         return super.onOptionsItemSelected(item)
     }
@@ -74,25 +69,41 @@ class DeletedNoteDetailsFragment : Fragment() {
 //        super.onPause()
 //    }
 
-
-//    private fun updateNoteInDatabase(favoriteStatus: Boolean) {
-//        val noteTitle = binding.noteTitleNoteDetailsScreen.text.toString()
-//        val noteBody = binding.noteBodyNoteDetailsScreen.text.toString()
-//
-//        val note = Note(args.currentNote.id, noteTitle, noteBody, favoriteStatus)
-//        mViewmodel.updateNote(note)
-//    }
-
     private fun restoreNote() {
-        val title = binding.noteTitleDeletedNoteDetailsScreen.text.toString()
-        val body = binding.noteBodyDeletedNoteDetailsScreen.text.toString()
-
-        val noteToDeleteFromDeletedNoteTable = DeletedNote(args.deletedNoteDetails.id, title, body, timeCreated = 0, timeUpdated = 0 , dateDeleted = 0)
-        val noteToRestoreToNoteTable = Note(0, title, body, timeCreated = 0, timeUpdated = 0)
-
+        val noteToRestore = Note(
+            args.deletedNoteDetails.id,
+            args.deletedNoteDetails.noteTitle,
+            args.deletedNoteDetails.noteBody,
+            false,
+            args.deletedNoteDetails.timeCreated,
+            args.deletedNoteDetails.timeUpdated,
+            false,
+            timeDeleted = 0
+        )
+        mViewmodel.updateNote(noteToRestore)
+        navigateToListFragment()
         Snackbar.make(binding.root, "Note restored", Snackbar.LENGTH_SHORT).show()
+    }
 
-        mViewmodel.addNote(noteToRestoreToNoteTable)
-        mViewmodel.deleteNotePermanently(noteToDeleteFromDeletedNoteTable)
+    private fun deleteNotePermanently() {
+        val noteToDelete = Note(
+            args.deletedNoteDetails.id,
+            args.deletedNoteDetails.noteTitle,
+            args.deletedNoteDetails.noteBody,
+            false,
+            args.deletedNoteDetails.timeCreated,
+            args.deletedNoteDetails.timeUpdated,
+            false,
+            timeDeleted = 0
+        )
+        mViewmodel.deleteNote(noteToDelete)
+        navigateToListFragment()
+        Snackbar.make(binding.root, "Note restored", Snackbar.LENGTH_SHORT).show()
+    }
+
+
+
+    private fun navigateToListFragment() {
+        Navigation.findNavController(binding.root).navigate(R.id.action_deletedNoteDetailsFragment_to_deletedNotesListFragment)
     }
 }

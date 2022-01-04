@@ -16,6 +16,8 @@ import com.judahben149.noteify.model.DeletedNote
 import com.judahben149.noteify.model.Note
 import com.judahben149.noteify.model.PrivateNote
 import com.judahben149.noteify.viewmodel.NoteViewModel
+import org.ocpsoft.prettytime.PrettyTime
+import java.util.*
 
 class FavoriteNoteDetailsFragment : Fragment() {
 
@@ -25,6 +27,7 @@ class FavoriteNoteDetailsFragment : Fragment() {
     private lateinit var mViewmodel: NoteViewModel
 
     private var isNoteFavorite: Boolean = false
+    var timeCreated: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,9 +44,12 @@ class FavoriteNoteDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         mViewmodel = ViewModelProvider(this).get(NoteViewModel::class.java)
+        timeCreated = PrettyTime().format(Date(args.favoriteNoteDetails.timeCreated))
 
         binding.noteTitleFavoriteNoteDetailsScreen.setText(args.favoriteNoteDetails.noteTitle)
         binding.noteBodyFavoriteNoteDetailsScreen.setText(args.favoriteNoteDetails.noteBody)
+        binding.dateCreatedFavoriteNoteDetailsScreen.text = "Created: " + timeCreated
+
         isNoteFavorite = args.favoriteNoteDetails.favoriteStatus
 
         binding.btnCancelFavoriteNoteDetailsScreen.setOnClickListener {
@@ -52,7 +58,7 @@ class FavoriteNoteDetailsFragment : Fragment() {
         }
 
         binding.btnSaveNoteFavoriteNoteDetailsScreen.setOnClickListener {
-//            updateNoteInDatabase(isNoteFavorite)
+            updateNoteInDatabase(isNoteFavorite, false)
             hideKeyboard()
             navigateToListFragment()
         }
@@ -69,14 +75,14 @@ class FavoriteNoteDetailsFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.removeFromFavorites) {
-            isNoteFavorite = false
             hideKeyboard()
-            removeFavoriteNote(isNoteFavorite)
+            isNoteFavorite = false
+            updateNoteInDatabase(isNoteFavorite, false)
             navigateToListFragment()
             Snackbar.make(binding.root, "Note removed from favorites", Snackbar.LENGTH_SHORT).show()
         } else if (item.itemId == R.id.deleteFavoriteNote){
             hideKeyboard()
-            deleteNote()
+            updateNoteInDatabase(isNoteFavorite, true)
             navigateToListFragment()
             Snackbar.make(binding.root, "Note sent to trash", Snackbar.LENGTH_SHORT).show()
         }
@@ -96,27 +102,25 @@ class FavoriteNoteDetailsFragment : Fragment() {
 //        super.onPause()
 //    }
 
-
-    private fun removeFavoriteNote(favoriteStatus: Boolean) {
+    private fun updateNoteInDatabase(favoriteStatus: Boolean, isNoteDeleted: Boolean) {
         val noteTitle = binding.noteTitleFavoriteNoteDetailsScreen.text.toString()
-        val noteBody = binding.noteBodyFavoriteNoteDetailsScreen.text.toString()
+        val noteBody = binding.noteTitleFavoriteNoteDetailsScreen.text.toString()
+        val timeUpdated = System.currentTimeMillis()
 
-        val note = Note(args.favoriteNoteDetails.id, noteTitle, noteBody, favoriteStatus, timeCreated = 0, timeUpdated = 0)
+        val note = Note(
+            args.favoriteNoteDetails.id,
+            noteTitle,
+            noteBody,
+            favoriteStatus = isNoteFavorite,
+            timeCreated = args.favoriteNoteDetails.timeCreated,
+            timeUpdated = timeUpdated,
+            deletedStatus = isNoteDeleted,
+            timeDeleted = timeUpdated
+        )
         mViewmodel.updateNote(note)
     }
 
-    private fun deleteNote() {
-        val title = binding.noteTitleFavoriteNoteDetailsScreen.text.toString()
-        val body = binding.noteBodyFavoriteNoteDetailsScreen.text.toString()
-
-        val noteToDeleteFromNoteTable = Note(args.favoriteNoteDetails.id, title, body, timeCreated = 0, timeUpdated = 0)
-        val noteToAddToDeletedTable = DeletedNote(0, title, body, timeCreated = 0, timeUpdated = 0, dateDeleted = 0)
-
-        mViewmodel.addDeletedNote(noteToAddToDeletedTable)
-        mViewmodel.deleteNote(noteToDeleteFromNoteTable)
-    }
-
     private fun navigateToListFragment() {
-        Navigation.findNavController(binding.root).navigate(R.id.action_privateNoteDetailsFragment_to_privateNotesFragment)
+        Navigation.findNavController(binding.root).navigate(R.id.action_favoriteNoteDetailsFragment_to_favoritesFragment2)
     }
 }

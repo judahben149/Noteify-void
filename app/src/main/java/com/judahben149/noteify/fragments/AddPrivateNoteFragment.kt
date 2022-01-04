@@ -60,8 +60,9 @@ class AddPrivateNoteFragment : Fragment() {
     private fun insertNoteToDatabase() {
         val noteTitle = binding.etNoteTitleAddPrivateNoteScreen.text.toString()
         val noteBody = binding.etNoteBodyAddPrivateNoteScreen.text.toString()
+        val timeCreated = System.currentTimeMillis()
 
-        val note = PrivateNote(0, noteTitle, noteBody)
+        val note = PrivateNote(0, noteTitle, noteBody, timeCreated, timeCreated)
         mViewmodel.addPrivateNote(note)
     }
 

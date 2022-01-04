@@ -108,8 +108,8 @@
             android:id="@+id/action_deletedNoteDetailsFragment_to_deletedNotesListFragment"
             app:destination="@id/deletedNotesListFragment" />
         <argument
-            android:name="DeletedNoteDetails"
-            app:argType="com.judahben149.noteify.model.DeletedNote" />
+            android:name="deletedNoteDetails"
+            app:argType="com.judahben149.noteify.model.Note" />
     </fragment>
     <fragment
         android:id="@+id/favoriteNoteDetailsFragment"

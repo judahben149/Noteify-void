@@ -9,6 +9,7 @@
     android:paddingBottom="2.5dp"
     android:paddingStart="15dp"
     app:cardCornerRadius="20dp"
+    android:background="?android:attr/selectableItemBackground"
     app:cardElevation="7dp">
 
     <LinearLayout
