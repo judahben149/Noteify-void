@@ -126,7 +126,7 @@ class NoteListFragment : Fragment() { //, androidx.appcompat.widget.SearchView.O
         builder.apply {
 
             setPositiveButton("Yes") { _, _ ->
-                mViewModel.deleteAllNotes()
+                mViewModel.sendAllNotesToTrash()
                 Snackbar.make(binding.root, "Successfully deleted all notes", Snackbar.LENGTH_LONG)
                     .show()
 

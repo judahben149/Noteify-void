@@ -16,7 +16,7 @@ class PrivateNoteViewModel(application: Application) : AndroidViewModel(applicat
 
     val readAllNotes: LiveData<List<Note>>
     val readAllFavoriteNote: LiveData<List<Note>>
-    val readAllDeletedNotes: LiveData<List<DeletedNote>>
+    val readAllDeletedNotes: LiveData<List<Note>>
     val readAllPrivateNotes: LiveData<List<PrivateNote>>
     private val repository: NoteRepository
 
@@ -61,27 +61,7 @@ class PrivateNoteViewModel(application: Application) : AndroidViewModel(applicat
     }
 
 
-    //methods for deleted notes
-    fun addDeletedNote(note: DeletedNote) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.addDeletedNote(note)
-        }
-    }
-
-    fun deleteNotePermanently(note: DeletedNote) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteNotePermanently(note)
-        }
-    }
-
-    fun deleteAllDeletedNotes() {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteAllDeletedNotes()
-        }
-    }
-
-
-    //methods for private notes
+      //methods for private notes
     fun addPrivateNote(note: PrivateNote) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.addPrivateNote(note)

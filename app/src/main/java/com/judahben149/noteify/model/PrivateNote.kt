@@ -15,11 +15,8 @@ data class PrivateNote(
     var noteTitle: String,
     @ColumnInfo(name = "note_body")
     var noteBody: String,
-    @ColumnInfo(name = "favorite_status")
-    var favoriteStatus: Boolean = false,
-    var dateDeleted: String = "",
     @ColumnInfo(name = "time_created")
-    var timeCreated: Long = 0,
+    var timeCreated: Long,
     @ColumnInfo(name = "time_updated")
-    var timeUpdated: Long = 0
+    var timeUpdated: Long
 ): Parcelable

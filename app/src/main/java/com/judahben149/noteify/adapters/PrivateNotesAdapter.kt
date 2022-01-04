@@ -8,6 +8,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.judahben149.noteify.databinding.FragmentNoteItemBinding
 import com.judahben149.noteify.fragments.PrivateNotesListFragmentDirections
 import com.judahben149.noteify.model.PrivateNote
+import org.ocpsoft.prettytime.PrettyTime
+import java.util.*
 
 class PrivateNotesAdapter() : RecyclerView.Adapter<PrivateNotesAdapter.PrivateNotesViewHolder>() {
 
@@ -17,9 +19,11 @@ class PrivateNotesAdapter() : RecyclerView.Adapter<PrivateNotesAdapter.PrivateNo
 
         fun bindItem(position: Int) {
             val currentNote = privateNotes[position]
+            val prettyTime: String = PrettyTime().format(Date(currentNote.timeUpdated))
 
             binding.tvNoteTitle.text = currentNote.noteTitle
             binding.tvNoteDescription.text = currentNote.noteBody
+            binding.tvNoteDate.text = prettyTime
 
             binding.noteItem.setOnClickListener {
                 Snackbar.make(binding.root, "You have clicked me", Snackbar.LENGTH_SHORT).show()

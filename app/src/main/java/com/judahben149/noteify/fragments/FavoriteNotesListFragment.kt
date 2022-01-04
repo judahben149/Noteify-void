@@ -30,7 +30,6 @@ class FavoriteNotesListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentFavoriteNotesListBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 

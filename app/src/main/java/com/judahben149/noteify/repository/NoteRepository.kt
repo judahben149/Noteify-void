@@ -10,8 +10,9 @@ class NoteRepository(private val noteDao: NoteDao) {
 
     val readAllNotes: LiveData<List<Note>> = noteDao.readAllNotes()
     val readAllFavoriteNotes: LiveData<List<Note>> = noteDao.readAllFavoriteNotes()
-    val readAllDeletedNotes: LiveData<List<DeletedNote>> = noteDao.readAllDeletedNotes()
+    val readAllDeletedNotes: LiveData<List<Note>> = noteDao.readAllDeletedNotes()
     val readAllPrivateNotes: LiveData<List<PrivateNote>> = noteDao.readAllPrivateNotes()
+
 
     suspend fun addNote(note: Note) {
         noteDao.addNote(note)
@@ -25,27 +26,24 @@ class NoteRepository(private val noteDao: NoteDao) {
         noteDao.deleteNote(note)
     }
 
-    suspend fun deleteAllNotes() {
-        noteDao.deleteAllNotes()
+    suspend fun sendAllNotesToTrash() {
+        noteDao.sendAllNotesToTrash()
     }
+
 
     fun searchDatabase(searchQuery: String): LiveData<List<Note>> {
         return noteDao.searchDatabase(searchQuery)
     }
 
-
-    //methods for deleted note
-    suspend fun addDeletedNote(note: DeletedNote) {
-        noteDao.addDeletedNote(note)
-    }
-
-    suspend fun deleteNotePermanently(note: DeletedNote) {
-        noteDao.deleteNotePermanently(note)
-    }
-
+    //methods for deleted notes
     suspend fun deleteAllDeletedNotes() {
         noteDao.deleteAllDeletedNotes()
     }
+
+    suspend fun deleteAllNotes() {
+        noteDao.deleteAllNotes()
+    }
+
 
     //methods for private note
     suspend fun addPrivateNote(note: PrivateNote) {
