@@ -55,7 +55,7 @@ class NoteDetailsFragment: Fragment() {
 
         binding.noteTitleNoteDetailsScreen.setText(args.currentNote.noteTitle)
         binding.noteBodyNoteDetailsScreen.setText(args.currentNote.noteBody)
-        binding.dateCreatedNoteDetailsScreen.text = "Created: " + timeCreated
+        binding.dateCreatedNoteDetailsScreen.text = "Created: $timeCreated"
 
         isNoteFavorite = args.currentNote.favoriteStatus
 
@@ -78,7 +78,6 @@ class NoteDetailsFragment: Fragment() {
         inflater.inflate(R.menu.note_details_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
-
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
