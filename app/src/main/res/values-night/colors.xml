@@ -14,4 +14,7 @@
 
     <color name="blue">#366ED8</color>
     <color name="blue_variant">#1F5DD1</color>
+
+    <color name="lemon_green">#4DE400</color>
+    <color name="darker_lemon_green">#3AA800</color>
 </resources>

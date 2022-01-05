@@ -8,7 +8,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" >
 
 
         <androidx.appcompat.widget.SearchView
@@ -44,25 +44,24 @@
             app:layout_constraintBottom_toBottomOf="parent"
             tools:listitem="@layout/fragment_note_item" />
 
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_add_note_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="30dp"
-            android:backgroundTint="@color/white"
-            android:contentDescription="@string/add_note_button"
-            android:elevation="10dp"
-            android:src="@drawable/ic_blue_plus_11965"
-            app:borderWidth="0dp"
-            app:layout_anchor="@id/rvList"
-            app:layout_anchorGravity="bottom|end" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_note_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="@color/white"
+        android:contentDescription="@string/add_note_button"
+        android:elevation="10dp"
+        android:src="@drawable/ic_blue_plus_11965"
+        app:borderWidth="0dp"
+        app:layout_anchor="@id/rvList"
+        app:layout_anchorGravity="bottom|end" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

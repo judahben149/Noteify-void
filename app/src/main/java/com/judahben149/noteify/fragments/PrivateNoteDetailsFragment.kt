@@ -10,7 +10,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.judahben149.noteify.R
 import com.judahben149.noteify.databinding.FragmentPrivateNoteDetailsBinding
 import com.judahben149.noteify.hideKeyboard
-import com.judahben149.noteify.model.DeletedNote
 import com.judahben149.noteify.model.Note
 import com.judahben149.noteify.model.PrivateNote
 import com.judahben149.noteify.viewmodel.NoteViewModel

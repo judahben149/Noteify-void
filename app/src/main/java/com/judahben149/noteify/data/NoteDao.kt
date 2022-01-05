@@ -2,7 +2,6 @@ package com.judahben149.noteify.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.judahben149.noteify.model.DeletedNote
 import com.judahben149.noteify.model.Note
 import com.judahben149.noteify.model.PrivateNote
 
@@ -38,6 +37,9 @@ interface NoteDao {
 
     @Query("DELETE FROM note_table")
     suspend fun deleteAllNotes()
+
+    @Query("UPDATE note_table SET deleted_status = 0")
+    suspend fun restoreNotesFromTrash()
 
     @Query("DELETE FROM note_table WHERE deleted_status = 1")
     suspend fun deleteAllDeletedNotes()

@@ -20,8 +20,6 @@ class NoteListAdapter(): RecyclerView.Adapter<NoteListAdapter.NoteListRecyclerVi
     var noteList = emptyList<Note>()
 
 
-
-
     inner class NoteListRecyclerViewViewHolder(private val binding: FragmentNoteItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bindItem(position: Int) {
             val currentNote = noteList[position]

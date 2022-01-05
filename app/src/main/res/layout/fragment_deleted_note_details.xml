@@ -23,6 +23,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+<com.google.android.material.textview.MaterialTextView
+        android:id="@+id/time_deleted_DeletedNoteDetailsScreen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:backgroundTint="@android:color/transparent"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/note_title_DeletedNoteDetailsScreen" />
+
 
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/deletedNoteDetails_Divider"
@@ -32,7 +44,7 @@
         app:dividerColor="#BDBDBD"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/note_title_DeletedNoteDetailsScreen"
+        app:layout_constraintTop_toBottomOf="@id/time_deleted_DeletedNoteDetailsScreen"
 
         />
 

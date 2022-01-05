@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.judahben149.noteify.model.DeletedNote
 import com.judahben149.noteify.model.Note
 import com.judahben149.noteify.model.PrivateNote
 
