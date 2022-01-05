@@ -5,7 +5,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.judahben149.noteify.data.NoteDatabase
-import com.judahben149.noteify.model.DeletedNote
 import com.judahben149.noteify.model.Note
 import com.judahben149.noteify.model.PrivateNote
 import com.judahben149.noteify.repository.NoteRepository
@@ -71,6 +70,12 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
     fun deleteAllNotes() {
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteAllNotes()
+        }
+    }
+
+    fun restoreNotesFromTrash() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.restoreNotesFromTrash()
         }
     }
 

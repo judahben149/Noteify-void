@@ -136,7 +136,7 @@ class NoteListFragment : Fragment() { //, androidx.appcompat.widget.SearchView.O
             }
 
             setTitle("Delete all notes")
-            setMessage("Are you sure you want to delete all notes?")
+            setMessage("Are you sure you want to delete all notes? Notes will be moved to trash")
             setIcon(R.drawable.ic_delete)
             create()
             show()

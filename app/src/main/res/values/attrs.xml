@@ -6,5 +6,7 @@
 
     <attr name="noteTitleColor" format="color" />
     <attr name="searchView" format="color" />
+    <attr name="searchViewOutline" format="color"/>
+    <attr name="toolBarColor" format="color"/>
 
 </resources>

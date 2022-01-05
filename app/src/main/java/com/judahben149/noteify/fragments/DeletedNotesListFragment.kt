@@ -56,10 +56,10 @@ class DeletedNotesListFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_restoreAllNotes -> {
-                Snackbar.make(binding.root, "Restoring all notes", Snackbar.LENGTH_SHORT).show()
+                restoreNotesDialog()
             }
             R.id.menu_deleteAllNotes -> {
-                deleteNotesForever()
+                deleteNotesForeverDialog()
             }
         }
         return super.onOptionsItemSelected(item)
@@ -90,7 +90,7 @@ class DeletedNotesListFragment : Fragment() {
         })
     }
 
-    private fun deleteNotesForever() {
+    private fun deleteNotesForeverDialog() {
         val builder = AlertDialog.Builder(requireContext())
 
         builder.apply {
@@ -105,6 +105,26 @@ class DeletedNotesListFragment : Fragment() {
 
             setTitle("Delete notes permanently")
             setMessage("Are you sure you want to empty the trash? Notes will be deleted forever.")
+            setIcon(R.drawable.ic_delete)
+            create()
+            show()
+        }
+    }
+
+    private fun restoreNotesDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+
+        builder.apply {
+
+            setPositiveButton("Restore") { _, _ ->
+                mViewModel.restoreNotesFromTrash()
+                Snackbar.make(binding.root, "Restoring all notes", Snackbar.LENGTH_SHORT).show()
+            }
+            setNegativeButton("Cancel") { _, _ ->
+            }
+
+            setTitle("Restore notes from trash")
+            setMessage("Are you sure you want to restore notes? Notes will be returned to note list.")
             setIcon(R.drawable.ic_delete)
             create()
             show()

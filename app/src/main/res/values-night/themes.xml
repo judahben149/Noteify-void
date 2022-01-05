@@ -2,82 +2,35 @@
     <!-- Base application theme. -->
     <style name="Theme.Noteify" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/blue</item>
-        <item name="colorPrimaryVariant">@color/blue_variant</item>
-        <item name="colorOnPrimary">#B5B5B5</item>
+        <item name="colorPrimary">@color/light_blue</item>
+        <item name="colorPrimaryVariant">@color/dark_blue</item>
+        <item name="colorOnPrimary">@color/grey_tint</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">#FDD300</item>
-        <item name="colorSecondaryVariant">#FFFDD300</item>
-        <item name="colorOnSecondary">#FFFDD300</item>
+        <item name="colorSecondary">@color/amber</item>
+        <item name="colorSecondaryVariant">@color/amber</item>
+        <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/white</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/black</item>
+        <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowLightStatusBar">true</item>
+
         <!-- Customize your theme here. -->
-<!--        <item name="actionBarStyle">@style/MyActionBar</item>-->
         <item name="noteTitleColor">#00E1CE</item>
+        <item name="searchViewOutline">@color/light_blue</item>
+        <item name="toolBarColor">#323232</item>
+
     </style>
 
     <style name="NoteTitle" parent="TextAppearance.AppCompat.Body1">
         <item name="textColor">?noteTitleColor</item>
     </style>
 
-<!--    <style name="toolbarStyle" parent="Widget.MaterialComponents.Toolbar">-->
-<!--        <item name="background"-->
-<!--    </style>-->
+
+    <style name="myFAB" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="backgroundTint">@color/light_blue</item>
+        <item name="elevation">10dp</item>
+        <item name="borderWidth">0dp</item>
+    </style>
 
 
-<!--    <style name="Base.Widget.AppCompat.Button" parent="Widget.Material3.Button">-->
-
-<!--        <item name="colorButtonNormal">@color/white</item>-->
-<!--        <item name="android:textColor">@color/blue</item>-->
-<!--    </style>-->
-
-<!--    <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">-->
-<!--        <item name="colorAccent">@color/black</item>-->
-<!--    </style>-->
-
-
-<!--    <style name="Base.Widget.AppCompat.Button" parent="Widget.MaterialComponents.Button">-->
-
-<!--        <item name="colorButtonNormal">@color/white</item>-->
-<!--        <item name="android:textColor">@color/blue</item>-->
-<!--    </style>-->
-
-<!--    <style name="AlertDialogTheme" parent="MaterialAlertDialog.Material3">-->
-<!--        <item name="colorAccent">@color/black</item>-->
-<!--    </style>-->
-
-<!--    <style name="MyActionBar" parent="@style/Widget.AppCompat.ActionBar">-->
-<!--        <item name="android:textColor">@color/black</item>-->
-<!--        <item name="titleTextStyle">@style/ActionBarTitleText</item>-->
-<!--    </style>-->
-
-<!--    <style name="ActionBarTitleText" parent="@style/ThemeOverlay.AppCompat.ActionBar">-->
-<!--        <item name="titleTextColor">@color/blue</item>-->
-<!--    </style>-->
-
-<!--    <style name="NoteTitle" parent="Widget.MaterialComponents.TextView">-->
-<!--        <item name="textColor">#09FF00</item>-->
-<!--    </style>-->
-
-<!--    <style name="MyButtonStyle_Primary" parent="Base.Widget.AppCompat.Button">-->
-<!--        <item name="android:textColor">#62FF00</item>-->
-<!--        <item name="backgroundTint">@color/blue_tint</item>-->
-<!--        <item name="android:textStyle">bold</item>-->
-<!--        <item name="android:elevation">@dimen/button_elevation</item>-->
-<!--    </style>-->
-
-<!--    <style name="MyButtonStyle_Secondary" parent="Base.Widget.AppCompat.Button">-->
-<!--        <item name="android:textColor">#000000</item>-->
-<!--        <item name="backgroundTint">@color/grey_tint</item>-->
-<!--        <item name="android:textStyle">bold</item>-->
-<!--        <item name="android:elevation">@dimen/button_elevation</item>-->
-<!--    </style>-->
-
-<!--    <style name="MyButtonStyle_FavoriteButtonColour" parent="Base.Widget.AppCompat.Button">-->
-<!--        <item name="android:textColor">#535353</item>-->
-<!--        <item name="backgroundTint">#F964FD</item>-->
-<!--        <item name="android:textStyle">bold</item>-->
-<!--        <item name="android:elevation">@dimen/button_elevation</item>-->
-<!--    </style>-->
 </resources>

@@ -2,7 +2,6 @@ package com.judahben149.noteify.repository
 
 import androidx.lifecycle.LiveData
 import com.judahben149.noteify.data.NoteDao
-import com.judahben149.noteify.model.DeletedNote
 import com.judahben149.noteify.model.Note
 import com.judahben149.noteify.model.PrivateNote
 
@@ -42,6 +41,10 @@ class NoteRepository(private val noteDao: NoteDao) {
 
     suspend fun deleteAllNotes() {
         noteDao.deleteAllNotes()
+    }
+
+    suspend fun restoreNotesFromTrash() {
+        noteDao.restoreNotesFromTrash()
     }
 
 
