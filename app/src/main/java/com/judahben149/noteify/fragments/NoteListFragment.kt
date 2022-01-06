@@ -93,6 +93,7 @@ class NoteListFragment : Fragment() { //, androidx.appcompat.widget.SearchView.O
         mViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
         mViewModel.readAllNotes.observe(viewLifecycleOwner, Observer { note ->
             adapter.setData(note)
+            Snackbar.make(binding.root, adapter.tellItemCount(note).toString(), Snackbar.LENGTH_SHORT).show()
         })
     }
 

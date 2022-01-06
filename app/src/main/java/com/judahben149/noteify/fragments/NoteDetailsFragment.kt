@@ -97,7 +97,7 @@ class NoteDetailsFragment: Fragment() {
     override fun onPause() {
         //this saves the note once the fragment loses focus or is going to be destroyed. Acts for Auto-save
         hideKeyboard()
-        updateNoteInDatabase(isNoteFavorite, isNoteDeleted)
+//        updateNoteInDatabase(isNoteFavorite, isNoteDeleted)
         super.onPause()
     }
 

@@ -56,4 +56,8 @@ class NoteListAdapter(): RecyclerView.Adapter<NoteListAdapter.NoteListRecyclerVi
         notifyDataSetChanged()
     }
 
+    fun tellItemCount(note: List<Note>): Int {
+        return note.size
+    }
+
 }
