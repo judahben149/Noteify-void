@@ -59,19 +59,19 @@ class AddNoteFragment : Fragment() {
         val noteBody = binding.etNoteBodyAddNoteScreen.text.toString()
         val timeCreated = System.currentTimeMillis()
 
-        val note = Note(0, noteTitle, noteBody, false, timeCreated, timeCreated)
+        val note = Note(0, noteTitle, noteBody, false, timeCreated, timeCreated, false, 0)
         mViewmodel.addNote(note)
 
         Navigation.findNavController(binding.root).navigate(R.id.action_addNoteFragment_to_noteListFragment)
     }
 
-    private fun addNoteToFavoritesDatabase() {
-        val noteTitle = binding.etNoteTitleAddNoteScreen.text.toString()
-        val noteBody = binding.etNoteBodyAddNoteScreen.text.toString()
-
-
-//        mViewmodel.addFavoriteNote(note)
-
-        Snackbar.make(binding.root, "Added to favorites", Snackbar.LENGTH_SHORT).show()
-    }
+//    private fun addNoteToFavoritesDatabase() {
+//        val noteTitle = binding.etNoteTitleAddNoteScreen.text.toString()
+//        val noteBody = binding.etNoteBodyAddNoteScreen.text.toString()
+//
+//
+////        mViewmodel.addFavoriteNote(note)
+//
+//        Snackbar.make(binding.root, "Added to favorites", Snackbar.LENGTH_SHORT).show()
+//    }
 }
