@@ -41,7 +41,6 @@ class FavoriteNotesListFragment : Fragment() {
         rvList.adapter = adapter
 
         setupRecyclerViewLayout() //this has a function which sets up divider
-
         setUpViewModel()
         setUpObservers()
         setHasOptionsMenu(true)
@@ -58,7 +57,7 @@ class FavoriteNotesListFragment : Fragment() {
     }
 
     private fun setUpObservers() {
-        mViewModel.readAllFavoriteNote.observe(viewLifecycleOwner, Observer { note ->
+        mViewModel.readAllFavoriteNotes.observe(viewLifecycleOwner, Observer { note ->
             adapter.setData(note)
         })
     }
