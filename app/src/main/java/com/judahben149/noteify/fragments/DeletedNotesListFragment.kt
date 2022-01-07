@@ -13,7 +13,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.judahben149.noteify.R
 import com.judahben149.noteify.adapters.DeletedNotesListAdapter
 import com.judahben149.noteify.databinding.FragmentDeletedNotesListBinding
-import com.judahben149.noteify.viewmodel.NoteViewModel
+import com.judahben149.noteify.viewmodel.DeletedNoteViewModel
 
 class DeletedNotesListFragment : Fragment() {
 
@@ -21,7 +21,7 @@ class DeletedNotesListFragment : Fragment() {
     private val binding get() = _binding!!
     private val adapter = DeletedNotesListAdapter()
     private lateinit var rvList: RecyclerView
-    private lateinit var mViewModel: NoteViewModel
+    private lateinit var mViewModel: DeletedNoteViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -81,7 +81,7 @@ class DeletedNotesListFragment : Fragment() {
     }
 
     private fun setUpViewModel() {
-        mViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
+        mViewModel = ViewModelProvider(this).get(DeletedNoteViewModel::class.java)
     }
 
     private fun setUpObservers() {

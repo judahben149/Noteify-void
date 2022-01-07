@@ -12,16 +12,16 @@ import com.judahben149.noteify.databinding.FragmentPrivateNoteDetailsBinding
 import com.judahben149.noteify.hideKeyboard
 import com.judahben149.noteify.model.Note
 import com.judahben149.noteify.model.PrivateNote
-import com.judahben149.noteify.viewmodel.NoteViewModel
+import com.judahben149.noteify.viewmodel.PrivateNoteViewModel
 
 class PrivateNoteDetailsFragment : Fragment() {
 
     private var _binding: FragmentPrivateNoteDetailsBinding? = null
     private val binding get() = _binding!!
     private val args by navArgs<PrivateNoteDetailsFragmentArgs>()
-    private lateinit var mViewmodel: NoteViewModel
+    private lateinit var mViewmodel: PrivateNoteViewModel
 
-    private var isNoteFavorite: Boolean = false
+//    private var isNoteFavorite: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,7 +37,7 @@ class PrivateNoteDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        mViewmodel = ViewModelProvider(this).get(NoteViewModel::class.java)
+        mViewmodel = ViewModelProvider(this).get(PrivateNoteViewModel::class.java)
 
         binding.noteTitlePrivateNoteDetailsScreen.setText(args.privateNoteDetails.noteTitle)
         binding.noteBodyPrivateNoteDetailsScreen.setText(args.privateNoteDetails.noteBody)
@@ -100,7 +100,7 @@ class PrivateNoteDetailsFragment : Fragment() {
         val noteToRemoveFromPrivateNotes = PrivateNote(args.privateNoteDetails.id, noteTitle, noteBody, timeCreated, timeUpdated)
         val noteToAddToNotes = Note(0, noteTitle, noteBody, timeCreated = timeCreated, timeUpdated = timeUpdated)
 
-        mViewmodel.addNote(noteToAddToNotes)
+        mViewmodel.removeNoteFromPrivate(noteToAddToNotes)
         mViewmodel.deletePrivateNote(noteToRemoveFromPrivateNotes)
     }
 
@@ -108,7 +108,7 @@ class PrivateNoteDetailsFragment : Fragment() {
         val title = binding.noteTitlePrivateNoteDetailsScreen.text.toString()
         val body = binding.noteBodyPrivateNoteDetailsScreen.text.toString()
         val timeCreated = args.privateNoteDetails.timeCreated
-        val timeDeleted = System.currentTimeMillis()
+//        val timeDeleted = System.currentTimeMillis()
 
         val noteToDeleteFromPrivateNoteTable = PrivateNote(args.privateNoteDetails.id, title, body, timeCreated, 0)
         mViewmodel.deletePrivateNote(noteToDeleteFromPrivateNoteTable)

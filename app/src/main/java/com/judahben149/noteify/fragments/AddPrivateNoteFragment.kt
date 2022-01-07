@@ -7,29 +7,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
-import com.google.android.material.snackbar.Snackbar
 import com.judahben149.noteify.R
-import com.judahben149.noteify.databinding.FragmentAddNoteBinding
 import com.judahben149.noteify.databinding.FragmentAddPrivateNoteBinding
-import com.judahben149.noteify.databinding.FragmentNoteDetailsBinding
 import com.judahben149.noteify.hideKeyboard
-import com.judahben149.noteify.model.Note
 import com.judahben149.noteify.model.PrivateNote
-import com.judahben149.noteify.viewmodel.NoteViewModel
+import com.judahben149.noteify.viewmodel.PrivateNoteViewModel
 
 
 class AddPrivateNoteFragment : Fragment() {
 
     private var _binding: FragmentAddPrivateNoteBinding? = null
     private val binding get() = _binding!!
-    private lateinit var mViewmodel: NoteViewModel
+    private lateinit var mViewmodel: PrivateNoteViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentAddPrivateNoteBinding.inflate(inflater, container, false)
-        mViewmodel = ViewModelProvider(this).get(NoteViewModel::class.java)
+        mViewmodel = ViewModelProvider(this).get(PrivateNoteViewModel::class.java)
         return binding.root
     }
 

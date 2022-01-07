@@ -10,7 +10,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.judahben149.noteify.R
 import com.judahben149.noteify.databinding.FragmentDeletedNoteDetailsBinding
 import com.judahben149.noteify.model.Note
-import com.judahben149.noteify.viewmodel.NoteViewModel
+import com.judahben149.noteify.viewmodel.DeletedNoteViewModel
 
 
 class DeletedNoteDetailsFragment : Fragment() {
@@ -18,7 +18,7 @@ class DeletedNoteDetailsFragment : Fragment() {
     private var _binding: FragmentDeletedNoteDetailsBinding? = null
     private val binding get() = _binding!!
     private val args by navArgs<DeletedNoteDetailsFragmentArgs>()
-    private lateinit var mViewmodel: NoteViewModel
+    private lateinit var mViewmodel: DeletedNoteViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,10 +30,10 @@ class DeletedNoteDetailsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        mViewmodel = ViewModelProvider(this).get(NoteViewModel::class.java)
+        mViewmodel = ViewModelProvider(this).get(DeletedNoteViewModel::class.java)
 
-        binding.noteTitleDeletedNoteDetailsScreen.setText(args.deletedNoteDetails.noteTitle)
-        binding.noteBodyDeletedNoteDetailsScreen.setText(args.deletedNoteDetails.noteBody)
+        binding.noteTitleDeletedNoteDetailsScreen.text = args.deletedNoteDetails.noteTitle
+        binding.noteBodyDeletedNoteDetailsScreen.text = args.deletedNoteDetails.noteBody
 
         super.onViewCreated(view, savedInstanceState)
     }
@@ -98,7 +98,7 @@ class DeletedNoteDetailsFragment : Fragment() {
         )
         mViewmodel.deleteNote(noteToDelete)
         navigateToListFragment()
-        Snackbar.make(binding.root, "Note restored", Snackbar.LENGTH_SHORT).show()
+        Snackbar.make(binding.root, "Note deleted permanently", Snackbar.LENGTH_SHORT).show()
     }
 
 

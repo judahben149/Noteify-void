@@ -10,12 +10,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.judahben149.noteify.R
-import com.judahben149.noteify.adapters.DeletedNotesListAdapter
 import com.judahben149.noteify.adapters.PrivateNotesAdapter
-import com.judahben149.noteify.databinding.FragmentAddPrivateNoteBinding
-import com.judahben149.noteify.databinding.FragmentDeletedNotesListBinding
 import com.judahben149.noteify.databinding.FragmentPrivateNotesBinding
-import com.judahben149.noteify.viewmodel.NoteViewModel
+import com.judahben149.noteify.viewmodel.PrivateNoteViewModel
 
 class PrivateNotesListFragment : Fragment() {
 
@@ -23,7 +20,7 @@ class PrivateNotesListFragment : Fragment() {
     private val binding get() = _binding!!
     private val adapter = PrivateNotesAdapter()
     private lateinit var rvList: RecyclerView
-    private lateinit var mViewModel: NoteViewModel
+    private lateinit var mViewModel: PrivateNoteViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -73,7 +70,7 @@ class PrivateNotesListFragment : Fragment() {
     }
 
     private fun setUpViewModel() {
-        mViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
+        mViewModel = ViewModelProvider(this).get(PrivateNoteViewModel::class.java)
     }
 
     private fun setUpObservers() {

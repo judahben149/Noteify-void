@@ -16,20 +16,15 @@ import java.util.*
 class NoteViewModel(application: Application) : AndroidViewModel(application) {
 
     val readAllNotes: LiveData<List<Note>>
-    val readAllFavoriteNote: LiveData<List<Note>>
-    val readAllDeletedNotes: LiveData<List<Note>>
-    val readAllPrivateNotes: LiveData<List<PrivateNote>>
+    val readAllFavoriteNotes: LiveData<List<Note>>
     private val repository: NoteRepository
 
-//    val isNoteFavorite: Boolean = false
 
     init {
         val noteDao = NoteDatabase.getDatabase(application).noteDao()
         repository = NoteRepository(noteDao)
         readAllNotes = repository.readAllNotes
-        readAllFavoriteNote = repository.readAllFavoriteNotes
-        readAllDeletedNotes = repository.readAllDeletedNotes
-        readAllPrivateNotes = repository.readAllPrivateNotes
+        readAllFavoriteNotes = repository.readAllFavoriteNotes
     }
 
     fun addNote(note: Note) {
@@ -60,52 +55,13 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
         return  repository.searchDatabase(searchQuery)
     }
 
-    //methods for deleted notes
-    fun deleteAllDeletedNotes() {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteAllDeletedNotes()
-        }
-    }
 
-    fun deleteAllNotes() {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteAllNotes()
-        }
-    }
-
-    fun restoreNotesFromTrash() {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.restoreNotesFromTrash()
-        }
-    }
-
-
-    //methods for private notes
-    fun addPrivateNote(note: PrivateNote) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.addPrivateNote(note)
-        }
-    }
-
-    fun deletePrivateNote(note: PrivateNote) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.deletePrivateNote(note)
-        }
-    }
-
-    fun deleteAllPrivateNotes() {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteAllPrivateNotes()
-        }
-    }
-
-
-    companion object {
-
-        fun getDateFormatter(locale: Locale): SimpleDateFormat {
-            val pattern = "EEE d MMM yyyy"
-            return SimpleDateFormat(pattern, locale)
-        }
-    }
+//    companion object {
+//
+//        fun getDateFormatter(locale: Locale): SimpleDateFormat {
+//            val pattern = "EEE d MMM yyyy"
+//            return SimpleDateFormat(pattern, locale)
+//        }
+//    }
 
 }
